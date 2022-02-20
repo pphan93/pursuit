@@ -41,16 +41,16 @@ const Home: NextPage = () => {
             <thead>
               <tr>
                 <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                  Page name
+                  Job Position
                 </th>
                 <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                  Visitors
+                  Company
                 </th>
                 <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                  Unique users
+                  Date Saved
                 </th>
                 <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                  Bounce rate
+                  Status
                 </th>
               </tr>
             </thead>
@@ -58,7 +58,24 @@ const Home: NextPage = () => {
             <tbody>
               <tr>
                 <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-blueGray-700 ">
-                  /argon/
+                  <div className="flex items-center">
+                    <div className="flex-shrink-0 h-10 w-10">
+                      <img
+                        className="h-10 w-10 rounded-full"
+                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/120px-Google_%22G%22_Logo.svg.png"
+                        alt=""
+                      />
+                    </div>
+
+                    <div className="ml-4">
+                      <div className="text-sm leading-5 font-medium text-gray-900">
+                        Senior Full Stack Developer
+                      </div>
+                      <div className="text-xs leading-5 text-gray-500">
+                        Updated 1 day ago
+                      </div>
+                    </div>
+                  </div>
                 </th>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 ">
                   4,569
@@ -67,13 +84,31 @@ const Home: NextPage = () => {
                   340
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                  <i className="fas fa-arrow-up text-emerald-500 mr-4"></i>
-                  46,53%
+                  <span className="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
+                    OFFER
+                  </span>
                 </td>
               </tr>
               <tr>
                 <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-blueGray-700">
-                  /argon/index.html
+                  <div className="flex items-center">
+                    <div className="flex-shrink-0 h-10 w-10">
+                      <img
+                        className="h-10 w-10 rounded-full"
+                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/120px-Google_%22G%22_Logo.svg.png"
+                        alt=""
+                      />
+                    </div>
+
+                    <div className="ml-4">
+                      <div className="text-sm leading-5 font-medium text-gray-900">
+                        Senior Full Stack Developer
+                      </div>
+                      <div className="text-xs leading-5 text-gray-500">
+                        Updated 1 day ago
+                      </div>
+                    </div>
+                  </div>
                 </th>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                   3,985
@@ -82,13 +117,31 @@ const Home: NextPage = () => {
                   319
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                  <i className="fas fa-arrow-down text-orange-500 mr-4"></i>
-                  46,53%
+                  <span className="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
+                    OFFER
+                  </span>
                 </td>
               </tr>
               <tr>
                 <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-blueGray-700">
-                  /argon/charts.html
+                  <div className="flex items-center">
+                    <div className="flex-shrink-0 h-10 w-10">
+                      <img
+                        className="h-10 w-10 rounded-full"
+                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/120px-Google_%22G%22_Logo.svg.png"
+                        alt=""
+                      />
+                    </div>
+
+                    <div className="ml-4">
+                      <div className="text-sm leading-5 font-medium text-gray-900">
+                        Senior Full Stack Developer
+                      </div>
+                      <div className="text-xs leading-5 text-gray-500">
+                        Updated 1 day ago
+                      </div>
+                    </div>
+                  </div>
                 </th>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                   3,513
@@ -97,13 +150,31 @@ const Home: NextPage = () => {
                   294
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                  <i className="fas fa-arrow-down text-orange-500 mr-4"></i>
-                  36,49%
+                  <span className="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
+                    OFFER
+                  </span>
                 </td>
               </tr>
               <tr>
                 <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-blueGray-700">
-                  /argon/tables.html
+                  <div className="flex items-center">
+                    <div className="flex-shrink-0 h-10 w-10">
+                      <img
+                        className="h-10 w-10 rounded-full"
+                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/120px-Google_%22G%22_Logo.svg.png"
+                        alt=""
+                      />
+                    </div>
+
+                    <div className="ml-4">
+                      <div className="text-sm leading-5 font-medium text-gray-900">
+                        Senior Full Stack Developer
+                      </div>
+                      <div className="text-xs leading-5 text-gray-500">
+                        Updated 1 day ago
+                      </div>
+                    </div>
+                  </div>
                 </th>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                   2,050
@@ -112,13 +183,31 @@ const Home: NextPage = () => {
                   147
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                  <i className="fas fa-arrow-up text-emerald-500 mr-4"></i>
-                  50,87%
+                  <span className="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
+                    OFFER
+                  </span>
                 </td>
               </tr>
               <tr>
                 <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-blueGray-700">
-                  /argon/profile.html
+                  <div className="flex items-center">
+                    <div className="flex-shrink-0 h-10 w-10">
+                      <img
+                        className="h-10 w-10 rounded-full"
+                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/120px-Google_%22G%22_Logo.svg.png"
+                        alt=""
+                      />
+                    </div>
+
+                    <div className="ml-4">
+                      <div className="text-sm leading-5 font-medium text-gray-900">
+                        Senior Full Stack Developer
+                      </div>
+                      <div className="text-xs leading-5 text-gray-500">
+                        Updated 1 day ago
+                      </div>
+                    </div>
+                  </div>
                 </th>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                   1,795
@@ -127,8 +216,9 @@ const Home: NextPage = () => {
                   190
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                  <i className="fas fa-arrow-down text-red-500 mr-4"></i>
-                  46,53%
+                  <span className="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
+                    OFFER
+                  </span>
                 </td>
               </tr>
             </tbody>
