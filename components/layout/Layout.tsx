@@ -24,9 +24,16 @@ const Layout: React.FC = (props) => {
         />
         <div className="flex overflow-hidden bg-white pt-16">
           {/* SideBar */}
-          <SideBar showSideBar={showSideBar} />
+          <SideBar
+            onShowSideBar={onShowSideBarHandler}
+            showSideBar={showSideBar}
+          />
           <div
-            className="bg-gray-900 opacity-50 hidden fixed inset-0 z-10"
+            onClick={onShowSideBarHandler}
+            className={
+              (showSideBar ? null : "hidden") +
+              " bg-gray-900 opacity-50 fixed inset-0 z-10"
+            }
             id="sidebarBackdrop"
           ></div>
           <div

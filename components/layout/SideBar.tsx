@@ -1,4 +1,9 @@
-const SideBar = ({ showSideBar }: { showSideBar: boolean }) => {
+type AppProps = {
+  onShowSideBar: () => void;
+  showSideBar: boolean;
+};
+
+const SideBar = ({ showSideBar }: AppProps) => {
   //pass the boolean from layout component to sidebar to show or hide sidebar for small screen
   let showSideBarCss;
   if (showSideBar) {

@@ -114,7 +114,7 @@ const Footer = () => {
         </div>
       </footer>
       <p className="text-center text-sm text-gray-500 my-10">
-        &copy; 2019-2021 . All rights reserved.
+        &copy; 2019-2022 . All rights reserved.
       </p>
     </>
   );
