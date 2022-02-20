@@ -20,6 +20,8 @@ const Avatar = () => {
       </div>
       <div className="relative" x-data="{ isOpen: false }">
         <button
+          type="button"
+          title="avatar"
           onClick={showDropDownHandler}
           className="p-1 bg-gray-200 rounded-full focus:outline-none focus:ring"
         >
