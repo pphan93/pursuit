@@ -29,6 +29,7 @@ const Layout: React.FC = (props) => {
             showSideBar={showSideBar}
           />
           <div
+            //close the sidebar when on click
             onClick={onShowSideBarHandler}
             className={
               (showSideBar ? null : "hidden") +
@@ -38,18 +39,17 @@ const Layout: React.FC = (props) => {
           ></div>
           <div
             id="main-content"
-            className="h-full w-full bg-gray-50 relative overflow-y-auto lg:ml-64"
+            className="h-full w-full bg-gray-50 relative overflow-y-auto lg:ml-60"
           >
             <main>
               {/* Body */}
               {props.children}
             </main>
+
             {/* Footer */}
             <Footer />
           </div>
         </div>
-        {/* <script async defer src="https://buttons.github.io/buttons.js"></script>
-      <script src="https://demo.themesberg.com/windster/app.bundle.js"></script> */}
       </div>
     </>
   );

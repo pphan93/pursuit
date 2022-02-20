@@ -8,10 +8,10 @@ const SideBar = ({ showSideBar }: AppProps) => {
   let showSideBarCss;
   if (showSideBar) {
     showSideBarCss =
-      "fixed z-20 h-full top-0 left-0 pt-16 flex lg:flex flex-shrink-0 flex-col w-64 transition-width duration-75";
+      "fixed z-20 h-full top-0 left-0 pt-16 flex lg:flex flex-shrink-0 flex-col w-60 transition-width duration-75";
   } else {
     showSideBarCss =
-      "fixed hidden z-20 h-full top-0 left-0 pt-16 flex lg:flex flex-shrink-0 flex-col w-64 transition-width duration-75";
+      "fixed hidden z-20 h-full top-0 left-0 pt-16 flex lg:flex flex-shrink-0 flex-col w-60 transition-width duration-75";
   }
   return (
     <aside id="sidebar" className={showSideBarCss} aria-label="Sidebar">
