@@ -7,6 +7,7 @@ import {
 } from "iconsax-react";
 
 import Image from "next/image";
+import Link from "next/link";
 import Avatar from "./Avatar";
 
 type AppProps = {
@@ -21,33 +22,35 @@ const TopNavBar = ({ onShowSideBar, showSideBar }: AppProps) => {
         <div className="flex items-center justify-between">
           <div className="flex items-center justify-start">
             <button
+              type="button"
+              title="hamburgerbutton"
               onClick={onShowSideBar}
               id="toggleSidebarMobile"
               aria-expanded="true"
-              aria-controls="sidebar"
+              // aria-controls="Sidebar"
               className="lg:hidden mr-2 text-gray-600 hover:text-gray-900 cursor-pointer p-2 hover:bg-gray-100 focus:bg-gray-100 focus:ring-2 focus:ring-gray-100 rounded"
             >
               <div id="toggleSidebarMobileHamburger" className="w-6 h-6 ">
                 {showSideBar ? <CloseSquare /> : <HambergerMenu />}
               </div>
             </button>
-            <a
-              href="https://demo.themesberg.com/windster/"
-              className="text-xl font-bold flex items-center lg:ml-2.5"
-            >
-              <div className="h-6 mr-3">
-                <Image
-                  src="/status-up.svg"
-                  alt="Pursuit Logo"
-                  layout="fixed"
-                  width={30}
-                  height={30}
+            <Link href="/">
+              <a className="text-xl font-bold flex items-center lg:ml-2.5">
+                <div className="h-6 mr-3">
+                  <Image
+                    src="/status-up.svg"
+                    alt="Pursuit Logo"
+                    layout="fixed"
+                    width={30}
+                    height={30}
 
-                  // objectFit='contain'
-                />
-              </div>
-              <span className="self-center whitespace-nowrap">Pursuit</span>
-            </a>
+                    // objectFit='contain'
+                  />
+                </div>
+                <span className="self-center whitespace-nowrap">Pursuit</span>
+              </a>
+            </Link>
+
             <form action="#" method="GET" className="hidden lg:block lg:pl-32">
               <label htmlFor="topbar-search" className="sr-only">
                 Search
@@ -73,18 +76,7 @@ const TopNavBar = ({ onShowSideBar, showSideBar }: AppProps) => {
               className="lg:hidden text-gray-500 hover:text-gray-900 hover:bg-gray-100 p-2 rounded-lg"
             >
               <span className="sr-only">Search</span>
-              <svg
-                className="w-6 h-6"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                  clipRule="evenodd"
-                ></path>
-              </svg>
+              <SearchNormal1 size="20" color="#1d3557" variant="Outline" />
             </button>
             <div className="hidden lg:flex items-center">
               <span className="mr-5">

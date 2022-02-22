@@ -1,4 +1,4 @@
-import { Filter } from "iconsax-react";
+import { AddSquare, Filter, Sort } from "iconsax-react";
 import TableRow from "./TableRow";
 
 interface JobApp {
@@ -19,21 +19,23 @@ const Table: React.FC<Props> = ({ jobApps }) => {
   return (
     <div className="w-full xl:w-8/12 mb-12 xl:mb-0 px-4 mx-auto mt-5">
       <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded ">
-        <div className="rounded-t mb-0 px-4 py-3 border-0">
+        <div className="rounded-t mb-0 px-4 pt-6 pb-8 border-0">
           <div className="flex flex-wrap items-center">
             <div className="relative w-full px-4 max-w-full flex-grow flex-1">
               <h3 className="font-semibold text-base text-blueGray-700">
                 All Job Applications
               </h3>
             </div>
+
+            {/* Side Button */}
             <div className="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
               <button
                 className=" text-black active:bg-indigo-600 text-xs font-bold px-3 py-1 hover:bg-gray-100 group rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                 type="button"
               >
                 <span className="flex items-center">
-                  <span className="pr-2">
-                    <Filter variant="Bold" />{" "}
+                  <span className="pr-2 text-xs">
+                    <AddSquare size="16" />
                   </span>
                   <span>New App</span>
                 </span>
@@ -44,7 +46,7 @@ const Table: React.FC<Props> = ({ jobApps }) => {
               >
                 <span className="flex items-center">
                   <span className="pr-2">
-                    <Filter variant="Bold" />{" "}
+                    <Sort size="16" />
                   </span>
                   <span>Sort</span>
                 </span>
@@ -55,7 +57,7 @@ const Table: React.FC<Props> = ({ jobApps }) => {
               >
                 <span className="flex items-center">
                   <span className="pr-2">
-                    <Filter variant="Bold" />{" "}
+                    <Filter size="16" variant="Bold" />
                   </span>
                   <span>Filter</span>
                 </span>
@@ -64,6 +66,7 @@ const Table: React.FC<Props> = ({ jobApps }) => {
           </div>
         </div>
 
+        {/* Table header */}
         <div className="block w-full overflow-x-auto">
           <table className="items-center bg-transparent w-full border-collapse ">
             <thead>
@@ -83,6 +86,7 @@ const Table: React.FC<Props> = ({ jobApps }) => {
               </tr>
             </thead>
 
+            {/* Items in Table - table rows */}
             <tbody>
               {jobApps.map((job) => {
                 return (
