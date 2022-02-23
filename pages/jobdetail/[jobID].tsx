@@ -1,4 +1,19 @@
+import { useState } from "react";
+import RatingStars from "../../components/ui/RatingStars";
+import styles from "./[jobID].module.css";
+
 const JobDetail = () => {
+  let rating = 3;
+  let styleName = [];
+
+  for (let star = 0; star < 5; star++) {
+    if (star + 1 <= rating) {
+      styleName.push("text-yellow-500");
+    } else {
+      styleName.push("text-gray-500");
+    }
+  }
+
   return (
     <div className="w-full xl:w-8/12 mb-12 xl:mb-0 px-4 mx-auto mt-5">
       <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded ">
@@ -16,77 +31,54 @@ const JobDetail = () => {
 
               <div className="flex items-center">
                 <img
-                  className="h-10 w-10 rounded-full mr-3"
+                  className="h-8 w-8 rounded-full mr-3"
                   src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/120px-Google_%22G%22_Logo.svg.png"
                 ></img>
-                <svg
-                  className="mx-1 w-4 h-4 fill-current text-yellow-500"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                >
-                  <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
-                </svg>
-                <svg
-                  className="mx-1 w-4 h-4 fill-current text-yellow-500"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                >
-                  <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
-                </svg>
-                <svg
-                  className="mx-1 w-4 h-4 fill-current text-yellow-500"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                >
-                  <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
-                </svg>
-                <svg
-                  className="mx-1 w-4 h-4 fill-current text-yellow-500"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                >
-                  <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
-                </svg>
-                <svg
-                  className="mx-1 w-4 h-4 fill-current text-gray-400"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                >
-                  <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
-                </svg>
+
+                {/* Show the star for the company rating */}
+                {styleName.map((star, idx) => {
+                  return (
+                    <RatingStars
+                      key={idx}
+                      styleName={`mx-1 w-4 h-4 fill-current text-yellow-500 ${star}`}
+                    />
+                  );
+                })}
               </div>
             </div>
-            <div className="w-full">
-              <div className="arrow-steps clearfix">
-                <div className="step current">
+            <div className="w-full pt-5">
+              <div
+                className={`${styles["arrow-steps"]} ${styles.clearfix} hidden md:block`}
+              >
+                <div className={`${styles.step} ${styles.done}`}>
                   <span>
                     <a href="#">Applied</a>
-                  </span>{" "}
+                  </span>
                 </div>
-                <div className="step">
+                <div className={`${styles.step} ${styles.current}`}>
                   <span>
                     <a href="#">Interview 1</a>
-                  </span>{" "}
+                  </span>
                 </div>
-                <div className="step">
+                <div className={styles.step}>
                   <span>
                     <a href="#">Take Home</a>
-                  </span>{" "}
+                  </span>
                 </div>
-                <div className="step">
+                <div className={styles.step}>
                   <span>
                     <a href="#">Interview 2</a>
-                  </span>{" "}
+                  </span>
                 </div>
-                <div className="step">
+                <div className={styles.step}>
                   <span>
                     <a href="#">Offered</a>
-                  </span>{" "}
+                  </span>
                 </div>
-                <div className="step">
+                <div className={styles.step}>
                   <span>
                     <a href="#">Accepted</a>
-                  </span>{" "}
+                  </span>
                 </div>
               </div>
             </div>

@@ -14,7 +14,7 @@ const Avatar = () => {
       onBlur={showDropDownHandler}
       className="flex items-center justify-start md:justify-center"
     >
-      <div className="mr-3">
+      <div className="mr-3 md:block hidden">
         <p className="text-sm text-right">John Doe</p>
         <p className="text-xs text-right">CA,USA</p>
       </div>
@@ -49,10 +49,8 @@ const Avatar = () => {
           }
         >
           <div className="flex flex-col p-4 space-y-1 font-medium border-b">
-            <span className="text-gray-800">Ahmed Kamel</span>
-            <span className="text-sm text-gray-400">
-              ahmed.kamel@example.com
-            </span>
+            <span className="text-gray-800">John Doe</span>
+            <span className="text-sm text-gray-400">john.doe@example.com</span>
           </div>
           <ul className="flex flex-col p-2 my-2 space-y-1">
             <li>
