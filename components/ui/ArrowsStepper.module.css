@@ -1,23 +1,8 @@
-/* jQuery Demo
-
 .clearfix:after {
   clear: both;
   content: "";
   display: block;
   height: 0;
-}
-
-/* Responsive Arrow Progress Bar */
-
-.clearfix:after {
-  clear: both;
-  content: "";
-  display: block;
-  height: 0;
-}
-
-.container {
-  font-family: "Lato", sans-serif;
 }
 
 .arrow-steps .step {

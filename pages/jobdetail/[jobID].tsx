@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useCallback, useRef } from "react";
+import ArrowsStepper from "../../components/ui/ArrowsStepper";
 import RatingStars from "../../components/ui/RatingStars";
 import styles from "./[jobID].module.css";
 
@@ -21,10 +22,10 @@ const JobDetail = () => {
           <div className=" md:p-8 mb-6">
             <div className="flex flex-wrap items-center">
               <div className="relative w-full  max-w-full flex-grow flex-1">
-                <h3 className="font-semibold text-base text-blueGray-700">
+                <h3 className="font-semibold text-base md:text-lg lg:text-2xl text-blueGray-700">
                   Software Engineer
                 </h3>
-                <p className="font-semibold text-base text-blueGray-700">
+                <p className="font-semibold text-sm md:text-base text-blueGray-700">
                   Google
                 </p>
               </div>
@@ -46,8 +47,8 @@ const JobDetail = () => {
                 })}
               </div>
             </div>
-            <div className="w-full pt-5">
-              <div
+            <div className="w-full mt-5 mb-5">
+              {/* <div
                 className={`${styles["arrow-steps"]} ${styles.clearfix} hidden md:block`}
               >
                 <div className={`${styles.step} ${styles.done}`}>
@@ -80,11 +81,12 @@ const JobDetail = () => {
                     <a href="#">Accepted</a>
                   </span>
                 </div>
-              </div>
+              </div> */}
+              <ArrowsStepper />
             </div>
             <form>
               <h6 className="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
-                User Information
+                Basic Information
               </h6>
               <div className="flex flex-wrap">
                 <div className="w-full lg:w-6/12 px-4">
@@ -93,12 +95,12 @@ const JobDetail = () => {
                       className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                       htmlFor="grid-password"
                     >
-                      Username
+                      Company
                     </label>
                     <input
                       type="text"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                      value="lucky.jesse"
+                      placeholder="Google"
                     />
                   </div>
                 </div>
@@ -108,12 +110,12 @@ const JobDetail = () => {
                       className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                       htmlFor="grid-password"
                     >
-                      Email address
+                      Job Title
                     </label>
                     <input
-                      type="email"
+                      type="text"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                      value="jesse@example.com"
+                      placeholder="Software Engineer"
                     />
                   </div>
                 </div>
@@ -123,12 +125,12 @@ const JobDetail = () => {
                       className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                       htmlFor="grid-password"
                     >
-                      First Name
+                      Job Url
                     </label>
                     <input
                       type="text"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                      value="Lucky"
+                      placeholder="https://url.com/jobs/google/softwareengineer"
                     />
                   </div>
                 </div>
@@ -138,12 +140,12 @@ const JobDetail = () => {
                       className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                       htmlFor="grid-password"
                     >
-                      Last Name
+                      Location
                     </label>
                     <input
                       type="text"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                      value="Jesse"
+                      placeholder="Toronto, CA"
                     />
                   </div>
                 </div>
@@ -152,11 +154,11 @@ const JobDetail = () => {
               <hr className="mt-6 border-b-1 border-blueGray-300" />
 
               <h6 className="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
-                Contact Information
+                More Information
               </h6>
               <div className="flex flex-wrap">
                 <div className="w-full lg:w-12/12 px-4">
-                  <div className="relative w-full mb-3">
+                  {/* <div className="relative w-full mb-3">
                     <label
                       className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                       htmlFor="grid-password"
@@ -168,7 +170,7 @@ const JobDetail = () => {
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       value="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
                     />
-                  </div>
+                  </div> */}
                 </div>
                 <div className="w-full lg:w-4/12 px-4">
                   <div className="relative w-full mb-3">
@@ -176,12 +178,12 @@ const JobDetail = () => {
                       className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                       htmlFor="grid-password"
                     >
-                      City
+                      Deadline
                     </label>
                     <input
-                      type="email"
+                      type="date"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                      value="New York"
+                      placeholder="02/02/2022"
                     />
                   </div>
                 </div>
@@ -191,12 +193,12 @@ const JobDetail = () => {
                       className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                       htmlFor="grid-password"
                     >
-                      Country
+                      Estimated Salary (Levels)
                     </label>
                     <input
-                      type="text"
+                      type="number"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                      value="United States"
+                      placeholder="150000"
                     />
                   </div>
                 </div>
@@ -206,13 +208,17 @@ const JobDetail = () => {
                       className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                       htmlFor="grid-password"
                     >
-                      Postal Code
+                      Official Salary
                     </label>
                     <input
-                      type="text"
+                      type="number"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                      value="Postal Code"
+                      placeholder="180000"
                     />
+                    <p className="mt-2 text-sm text-red-600 dark:text-red-500">
+                      <span className="font-medium">Oops!</span> Username
+                      already taken!
+                    </p>
                   </div>
                 </div>
               </div>
@@ -220,7 +226,7 @@ const JobDetail = () => {
               <hr className="mt-6 border-b-1 border-blueGray-300" />
 
               <h6 className="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
-                About Me
+                Job Description
               </h6>
               <div className="flex flex-wrap">
                 <div className="w-full lg:w-12/12 px-4">
@@ -229,7 +235,7 @@ const JobDetail = () => {
                       className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                       htmlFor="grid-password"
                     >
-                      About me
+                      Job Description
                     </label>
                     <textarea
                       type="text"
