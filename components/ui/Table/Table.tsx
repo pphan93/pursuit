@@ -18,7 +18,8 @@ interface Props {
 
 const Table: React.FC<Props> = ({ jobApps }) => {
   const [currentPage, setCurrentPage] = useState(1);
-  let pagesNumber: number = jobApps.length / 10;
+  let pageLimit = 10;
+  let pagesNumber: number = Math.round(jobApps.length / pageLimit);
 
   function nextPage() {
     if (currentPage !== pagesNumber) {
@@ -32,9 +33,24 @@ const Table: React.FC<Props> = ({ jobApps }) => {
     }
   }
 
-  function getCurrentData() {
-    return jobApps.slice(currentPage * 10 - 10, currentPage * 10);
+  function changePage(e) {
+    setCurrentPage(Math.floor(e.target.textContent));
   }
+
+  function getCurrentData() {
+    return jobApps.slice(
+      currentPage * pageLimit - pageLimit,
+      currentPage * pageLimit
+    );
+  }
+
+  const getPaginationGroup = () => {
+    // let start = Math.floor((currentPage - 1) / pageLimit) * pageLimit;
+    let start = 0;
+    return new Array(pagesNumber).fill(null).map((_, idx) => start + idx + 1);
+  };
+
+  console.log(getPaginationGroup());
 
   return (
     <div className="w-full xl:w-8/12 mb-12 xl:mb-0 px-4 mx-auto mt-5">
@@ -147,7 +163,7 @@ const Table: React.FC<Props> = ({ jobApps }) => {
             </g>
           </svg>
 
-          <p className="leading-relaxed cursor-pointer mx-2 text-blue-600 hover:text-blue-600 text-sm">
+          {/* <p className="leading-relaxed cursor-pointer mx-2 text-blue-600 hover:text-blue-600 text-sm">
             1
           </p>
           <p className="leading-relaxed cursor-pointer mx-2 text-sm hover:text-blue-600">
@@ -160,7 +176,21 @@ const Table: React.FC<Props> = ({ jobApps }) => {
           <p className="leading-relaxed cursor-pointer mx-2 text-sm hover:text-blue-600">
             {" "}
             4{" "}
-          </p>
+          </p> */}
+
+          {getPaginationGroup().map((number, idx) => {
+            return (
+              <p
+                onClick={changePage}
+                key={idx}
+                className={`leading-relaxed cursor-pointer mx-2 text-sm hover:text-blue-600 ${
+                  currentPage === number ? "text-blue-600" : null
+                }`}
+              >
+                {number}
+              </p>
+            );
+          })}
           <svg
             className="h-6 w-6"
             width="24"
