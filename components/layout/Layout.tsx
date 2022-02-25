@@ -41,9 +41,13 @@ const Layout: React.FC = (props) => {
             id="main-content"
             className="h-full w-full bg-gray-50 relative overflow-y-auto lg:ml-60"
           >
-            <main>
+            <main className="w-full xl:w-8/12 mb-12 xl:mb-0 px-4 mx-auto mt-5">
               {/* Body */}
-              {props.children}
+              <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded ">
+                <div className="rounded-t mb-0 px-4 pt-6 pb-8 border-0">
+                  {props.children}
+                </div>
+              </div>
             </main>
 
             {/* Footer */}
