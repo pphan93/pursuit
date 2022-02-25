@@ -6,6 +6,8 @@ import {
   TaskSquare,
 } from "iconsax-react";
 import Link from "next/link";
+import ActiveLink from "./ActiveLink";
+import { useRouter } from "next/router";
 
 type AppProps = {
   onShowSideBar: () => void;
@@ -13,6 +15,7 @@ type AppProps = {
 };
 
 const SideBar = ({ showSideBar }: AppProps) => {
+  const router = useRouter();
   //pass the boolean from layout component to sidebar to show or hide sidebar for small screen
   let showSideBarCss;
   if (showSideBar) {
@@ -55,7 +58,23 @@ const SideBar = ({ showSideBar }: AppProps) => {
                 </form>
               </li>
               <li>
+                {/* <ActiveLink activeClassName="bg-blue" href="/"> */}
                 <Link href="/">
+                  <a
+                    title="home"
+                    className={`text-base font-normal rounded-lg flex items-center p-2 hover:bg-gray-100 group ${
+                      router.pathname == "/" ? "text-blue-900" : "text-gray-900"
+                    }`}
+                  >
+                    <span className="w-6 h-6 text-gray-500 group-hover:text-gray-900 transition duration-75">
+                      <Home2 />
+                    </span>
+
+                    <span className="ml-3">Home</span>
+                  </a>
+                </Link>
+                {/* </ActiveLink> */}
+                {/* <Link href="/">
                   <a
                     title="home"
                     className="text-base text-gray-900 font-normal rounded-lg flex items-center p-2 hover:bg-gray-100 group"
@@ -66,7 +85,7 @@ const SideBar = ({ showSideBar }: AppProps) => {
 
                     <span className="ml-3">Home</span>
                   </a>
-                </Link>
+                </Link> */}
               </li>
               <li>
                 <Link href="/favorites">
