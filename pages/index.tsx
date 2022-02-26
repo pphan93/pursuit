@@ -1,7 +1,11 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
+import Layout from "../components/layout/Layout";
 import Table from "../components/ui/Table/Table";
+import type { ReactElement } from "react";
+
+// import Layout from "../components/layout/Layout";
 // import styles from "../styles/Home.module.css";
 
 // type jobAppsType = {
@@ -248,3 +252,7 @@ const Home: NextPage = () => {
 };
 
 export default Home;
+
+Home.getLayout = function getLayout(page: ReactElement) {
+  return <Layout>{page}</Layout>;
+};

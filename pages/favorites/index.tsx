@@ -1,4 +1,5 @@
 import type { NextPage } from "next";
+import Layout from "../../components/layout/Layout";
 import Table from "../../components/ui/Table/Table";
 // import styles from "../styles/Home.module.css";
 
@@ -246,3 +247,7 @@ const Favorites: NextPage = () => {
 };
 
 export default Favorites;
+
+Favorites.getLayout = function getLayout(page: ReactElement) {
+  return <Layout>{page}</Layout>;
+};
