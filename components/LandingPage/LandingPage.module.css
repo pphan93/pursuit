@@ -1,0 +1,44 @@
+/* .landingpage::after {
+  content: "";
+  position: absolute;
+  width: 600px;
+  height: 800px;
+  background-image: url("../../public/Group\ 3516.png");
+  background-repeat: no-repeat;
+  background-position: 100%;
+  background-size: contain;
+  top: 0%;
+  right: 50px;
+  z-index: -1;
+} */
+
+/* .landingpage {
+  content: "";
+  position: absolute;
+  width: 300px;
+  height: 400px;
+  background-image: url("../../public/Group\ 1134.png");
+  background-repeat: no-repeat;
+  background-position: 100%;
+  background-size: contain;
+  top: 30%;
+  right: 0px;
+  z-index: -1;
+} */
+
+@media only screen and (min-width: 1280px) {
+  .landingpage1::after {
+    content: "";
+    position: absolute;
+    width: 600px;
+    height: 800px;
+    background-image: url("../../public/Group\ 3516.png");
+    background-repeat: no-repeat;
+    background-position: 100%;
+    background-size: contain;
+    bottom: 10%;
+    right: 0px;
+    /* background-position: center; */
+    z-index: -1;
+  }
+}

@@ -1,4 +1,5 @@
 import Form from "../../components/Form/Form";
+import Layout from "../../components/layout/Layout";
 
 const NewApplication = () => {
   return (
@@ -12,3 +13,7 @@ const NewApplication = () => {
 };
 
 export default NewApplication;
+
+NewApplication.getLayout = function getLayout(page: ReactElement) {
+  return <Layout>{page}</Layout>;
+};

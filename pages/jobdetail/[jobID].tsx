@@ -1,4 +1,6 @@
 import { useState, useCallback, useRef } from "react";
+import Form from "../../components/Form/Form";
+import Layout from "../../components/layout/Layout";
 import ArrowsStepper from "../../components/ui/ArrowsStepper";
 import RatingStars from "../../components/ui/Icon/RatingStars";
 import styles from "./[jobID].module.css";
@@ -50,6 +52,7 @@ const JobDetail = () => {
       <div className="w-full mt-5 mb-5">
         <ArrowsStepper />
       </div>
+      <Form />
     </div>
     // </div> */
 
@@ -59,3 +62,7 @@ const JobDetail = () => {
 };
 
 export default JobDetail;
+
+JobDetail.getLayout = function getLayout(page: ReactElement) {
+  return <Layout>{page}</Layout>;
+};
