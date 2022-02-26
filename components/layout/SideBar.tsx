@@ -5,9 +5,7 @@ import {
   Setting3,
   TaskSquare,
 } from "iconsax-react";
-import Link from "next/link";
-import ActiveLink from "./ActiveLink";
-import { useRouter } from "next/router";
+import NavLink from "./NavLink";
 
 type AppProps = {
   onShowSideBar: () => void;
@@ -15,7 +13,6 @@ type AppProps = {
 };
 
 const SideBar = ({ showSideBar }: AppProps) => {
-  const router = useRouter();
   //pass the boolean from layout component to sidebar to show or hide sidebar for small screen
   let showSideBarCss;
   if (showSideBar) {
@@ -58,90 +55,29 @@ const SideBar = ({ showSideBar }: AppProps) => {
                 </form>
               </li>
               <li>
-                {/* <ActiveLink activeClassName="bg-blue" href="/"> */}
-                <Link href="/">
-                  <a
-                    title="home"
-                    className={`text-base font-normal rounded-lg flex items-center p-2 hover:bg-gray-100 group ${
-                      router.pathname == "/" ? "text-blue-900" : "text-gray-900"
-                    }`}
-                  >
-                    <span className="w-6 h-6 text-gray-500 group-hover:text-gray-900 transition duration-75">
-                      <Home2 />
-                    </span>
-
-                    <span className="ml-3">Home</span>
-                  </a>
-                </Link>
-                {/* </ActiveLink> */}
-                {/* <Link href="/">
-                  <a
-                    title="home"
-                    className="text-base text-gray-900 font-normal rounded-lg flex items-center p-2 hover:bg-gray-100 group"
-                  >
-                    <span className="w-6 h-6 text-gray-500 group-hover:text-gray-900 transition duration-75">
-                      <Home2 />
-                    </span>
-
-                    <span className="ml-3">Home</span>
-                  </a>
-                </Link> */}
+                <NavLink path="/" name="Home">
+                  <Home2 />
+                </NavLink>
               </li>
               <li>
-                <Link href="/favorites">
-                  <a
-                    title="favorites"
-                    className="text-base text-gray-900 font-normal rounded-lg flex items-center p-2 hover:bg-gray-100 group"
-                  >
-                    <span className="w-6 h-6 text-gray-500 group-hover:text-gray-900 transition duration-75">
-                      <FavoriteChart />
-                    </span>
-
-                    <span className="ml-3">Favorites</span>
-                  </a>
-                </Link>
+                <NavLink path="/favorites" name="Favorites">
+                  <FavoriteChart />
+                </NavLink>
               </li>
               <li>
-                <Link href="/favorites">
-                  <a
-                    title="favorites"
-                    className="text-base text-gray-900 font-normal rounded-lg flex items-center p-2 hover:bg-gray-100 group"
-                  >
-                    <span className="w-6 h-6 text-gray-500 group-hover:text-gray-900 transition duration-75">
-                      <TaskSquare />
-                    </span>
-
-                    <span className="ml-3">Tasks</span>
-                  </a>
-                </Link>
+                <NavLink path="/tasks" name="Tasks">
+                  <TaskSquare />
+                </NavLink>
               </li>
               <li>
-                <Link href="/favorites">
-                  <a
-                    title="favorites"
-                    className="text-base text-gray-900 font-normal rounded-lg flex items-center p-2 hover:bg-gray-100 group"
-                  >
-                    <span className="w-6 h-6 text-gray-500 group-hover:text-gray-900 transition duration-75">
-                      <ChartSquare />
-                    </span>
-
-                    <span className="ml-3">Metrics</span>
-                  </a>
-                </Link>
+                <NavLink path="/metrics" name="Metrics">
+                  <ChartSquare />
+                </NavLink>
               </li>
               <li>
-                <Link href="/favorites">
-                  <a
-                    title="favorites"
-                    className="text-base text-gray-900 font-normal rounded-lg flex items-center p-2 hover:bg-gray-100 group"
-                  >
-                    <span className="w-6 h-6 text-gray-500 group-hover:text-gray-900 transition duration-75">
-                      <Setting3 />
-                    </span>
-
-                    <span className="ml-3">Settings</span>
-                  </a>
-                </Link>
+                <NavLink path="/settings" name="Settings">
+                  <Setting3 />
+                </NavLink>
               </li>
             </ul>
             <div className="space-y-2 pt-2">
