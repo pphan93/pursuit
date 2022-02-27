@@ -12,9 +12,11 @@ const SignUp = () => {
           }}
         ></div>
         <div className="w-full p-8 lg:w-1/2">
-          <h2 className="text-2xl font-semibold text-gray-700 text-center">
-            Pursuit
-          </h2>
+          <Link href="/landingpage">
+            <h2 className="text-2xl font-semibold text-gray-700 text-center">
+              Pursuit
+            </h2>
+          </Link>
           <p className="text-xl text-gray-600 text-center">
             Let's get started!
           </p>
