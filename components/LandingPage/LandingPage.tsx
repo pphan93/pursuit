@@ -35,7 +35,7 @@ const SplashPage = () => {
             Pursuit
           </a>
 
-          <div className="flex w-1/2 justify-end content-center">
+          <div className="flex w-1/2 justify-end content-center ">
             <a
               className="inline-block text-blue-300 no-underline hover:text-indigo-800 hover:text-underline text-center h-10 p-2 md:h-auto md:p-4"
               data-tippy-content="@twitter_handle"
@@ -69,7 +69,7 @@ const SplashPage = () => {
       <div></div>
 
       <div
-        className={`relative container pt-24 md:pt-48 px-6 mx-auto flex flex-wrap flex-col md:flex-row items-center ${style.landingpage}`}
+        className={`relative container pt-24 md:pt-35 px-6 mx-auto flex flex-wrap  flex-col md:flex-row items-center ${style.landingpage}`}
       >
         <div className="flex flex-col w-full xl:w-2/5 justify-center lg:items-start overflow-y-hidden">
           <h1 className="my-4 text-3xl md:text-5xl text-purple-800 font-bold leading-tight text-center md:text-left slide-in-bottom-h1">
@@ -100,6 +100,11 @@ const SplashPage = () => {
         <img
           className="absolute  bottom-0 right-0 z-[-1]"
           src="Group 3516.png"
+        />
+
+        <img
+          className="absolute  bottom-0 left-0 z-[-1]"
+          src="Group 3510.png"
         />
 
         <div className="w-full pt-16 pb-6 text-sm text-center md:text-left fade-in">
