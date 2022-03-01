@@ -4,6 +4,7 @@ import Image from "next/image";
 import Layout from "../components/layout/Layout";
 import Table from "../components/ui/Table/Table";
 import type { ReactElement } from "react";
+import { getSession } from "next-auth/react";
 
 // import Layout from "../components/layout/Layout";
 // import styles from "../styles/Home.module.css";
@@ -250,6 +251,22 @@ const jobApps = [
 const Home: NextPage = () => {
   return <Table jobApps={jobApps} />;
 };
+
+export async function getServerSideProps(context) {
+  const session = await getSession({ req: context.req });
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/landingpage",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: { session },
+  };
+}
 
 export default Home;
 
