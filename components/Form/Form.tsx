@@ -73,7 +73,22 @@ const Form = () => {
         More Information
       </h6>
       <div className="flex flex-wrap">
-        <div className="w-full lg:w-12/12 px-4"></div>
+        <div className="w-full lg:w-12/12 px-4">
+          <div className="relative w-full mb-3">
+            <select
+              title="status"
+              className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              id="grid-state"
+            >
+              <option>Applied</option>
+              <option>Interview 1</option>
+              <option>Take Home</option>
+              <option>Interview 2</option>
+              <option>Offered</option>
+              <option>Accepted</option>
+            </select>
+          </div>
+        </div>
         <div className="w-full lg:w-4/12 px-4">
           <div className="relative w-full mb-3">
             <label

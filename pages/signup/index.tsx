@@ -1,6 +1,8 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React, { useState } from "react";
 
+//declare a type for user input
 type IUser = {
   firstName: string;
   lastName: string;
@@ -18,6 +20,8 @@ const SignUp = () => {
     confirmPassword: "",
   } as IUser);
 
+  const router = useRouter();
+
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
 
@@ -26,6 +30,8 @@ const SignUp = () => {
 
   const onSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    //quick validation to check if it not empty and contain @ in email
     if (
       !userInput.email ||
       !userInput.email.includes("@") ||
@@ -35,6 +41,7 @@ const SignUp = () => {
       return;
     }
 
+    //send user info to backend to add user to database
     const res = await fetch("/api/auth/signup", {
       method: "POST",
       headers: {
@@ -49,7 +56,15 @@ const SignUp = () => {
     });
 
     const data = await res.json();
-    console.log(data);
+    const statusCode = res.status;
+    console.log(statusCode);
+
+    //if status 201 - use created successfully then redirect to login page else show error message
+    if (statusCode === 201) {
+      router.push("/login");
+    } else {
+      console.log(data);
+    }
   };
   return (
     <form onSubmit={onSubmitHandler}>
