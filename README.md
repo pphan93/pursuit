@@ -85,7 +85,7 @@ To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
 
-- [NodeJS](https://nodejs.dev/learn/how-to-install-nodejs) - Lastest version, please follow instruction from official document 
+- [NodeJS](https://nodejs.dev/learn/how-to-install-nodejs) - Lastest version, please follow instruction from official document
 
 - [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
   ```sh
@@ -94,7 +94,7 @@ To get a local copy up and running follow these simple example steps.
 
 ### Installation
 
-1. Install mongodb and configure it. You can use mongodb atlas if you dont want to install [MongoDB Atlas](https://docs.atlas.mongodb.com/getting-started/). Please go ahead and register it and then get connection detail for nodejs. 
+1. Install mongodb and configure it. You can use mongodb atlas if you dont want to install [MongoDB Atlas](https://docs.atlas.mongodb.com/getting-started/). Please go ahead and register it and then get connection detail for nodejs.
 2. Clone the repo
    ```sh
    git clone https://github.com/pphan93/pursuit.git
@@ -104,9 +104,10 @@ To get a local copy up and running follow these simple example steps.
    npm install
    ```
 4. Enter your API in `env.local` - create the file if you haven't already in the root folder of the project
+
    ```js
    SECRET=xxxx
-   
+
    AUTH0_CLIENT_ID=xxxx
    AUTH0_CLIENT_SECRET=xxx
    AUTH0_ISSUER=https://dev-xxxxx.us.auth0.com
@@ -141,7 +142,7 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 - [ ] Feature 3
   - [ ] Nested Feature
 
-See the [open issues](https://github.com/github_username/repo_name/issues) for a full list of proposed features (and known issues).
+See the [open issues](https://github.com/pphan93/pursuit/issues) for a full list of proposed features (and known issues).
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -174,9 +175,9 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 ## Contact
 
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com
+Phuoc Phan - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com
 
-Project Link: [https://github.com/github_username/repo_name](https://github.com/github_username/repo_name)
+Project Link: [https://github.com/pphan93/pursuit](https://github.com/pphan93/pursuit)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -194,15 +195,15 @@ Project Link: [https://github.com/github_username/repo_name](https://github.com/
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
 [contributors-shield]: https://img.shields.io/github/contributors/github_username/repo_name.svg?style=for-the-badge
-[contributors-url]: https://github.com/github_username/repo_name/graphs/contributors
+[contributors-url]: https://github.com/pphan93/pursuit/contributors
 [forks-shield]: https://img.shields.io/github/forks/github_username/repo_name.svg?style=for-the-badge
-[forks-url]: https://github.com/github_username/repo_name/network/members
+[forks-url]: https://github.com/pphan93/pursuit/network/members
 [stars-shield]: https://img.shields.io/github/stars/github_username/repo_name.svg?style=for-the-badge
-[stars-url]: https://github.com/github_username/repo_name/stargazers
+[stars-url]: https://github.com/pphan93/pursuit/stargazers
 [issues-shield]: https://img.shields.io/github/issues/github_username/repo_name.svg?style=for-the-badge
-[issues-url]: https://github.com/github_username/repo_name/issues
+[issues-url]: https://github.com/pphan93/pursuit/issues
 [license-shield]: https://img.shields.io/github/license/github_username/repo_name.svg?style=for-the-badge
 [license-url]: https://github.com/github_username/repo_name/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/linkedin_username
-[product-screenshot]: images/screenshot.png
+[linkedin-url]: https://www.linkedin.com/in/phuoc-phan/
+[product-screenshot]: public/Pursuit_pic.png
