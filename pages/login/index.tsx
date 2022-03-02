@@ -88,10 +88,14 @@ const Login = () => {
               <span className="border-b w-1/5 lg:w-1/4"></span>
             </div>
             <div className="mt-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
+              <label
+                htmlFor="email"
+                className="block text-gray-700 text-sm font-bold mb-2"
+              >
                 Email Address
               </label>
               <input
+                title="email input"
                 className="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
                 type="email"
                 name="email"
@@ -101,7 +105,10 @@ const Login = () => {
             </div>
             <div className="mt-4">
               <div className="flex justify-between">
-                <label className="block text-gray-700 text-sm font-bold mb-2">
+                <label
+                  htmlFor="password"
+                  className="block text-gray-700 text-sm font-bold mb-2"
+                >
                   Password
                 </label>
                 <a href="#" className="text-xs text-gray-500">
@@ -109,6 +116,7 @@ const Login = () => {
                 </a>
               </div>
               <input
+                title="password input"
                 className="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
                 type="password"
                 name="password"

@@ -1,4 +1,6 @@
 import "../styles/globals.css";
+import { SessionProvider } from "next-auth/react";
+
 // import type { AppProps } from "next/app";
 // import Layout from "../components/layout/Layout";
 
@@ -29,5 +31,9 @@ export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   // Use the layout defined at the page level, if available
   const getLayout = Component.getLayout ?? ((page) => page);
 
-  return getLayout(<Component {...pageProps} />);
+  return getLayout(
+    <SessionProvider session={pageProps.session}>
+      <Component {...pageProps} />
+    </SessionProvider>
+  );
 }

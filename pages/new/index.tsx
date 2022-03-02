@@ -1,3 +1,4 @@
+import { ReactElement } from "react";
 import Form from "../../components/Form/Form";
 import Layout from "../../components/layout/Layout";
 

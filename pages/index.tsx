@@ -5,6 +5,7 @@ import Layout from "../components/layout/Layout";
 import Table from "../components/ui/Table/Table";
 import type { ReactElement } from "react";
 import { getSession } from "next-auth/react";
+import { GetServerSideProps } from "next";
 
 // import Layout from "../components/layout/Layout";
 // import styles from "../styles/Home.module.css";
@@ -252,7 +253,7 @@ const Home: NextPage = () => {
   return <Table jobApps={jobApps} />;
 };
 
-export async function getServerSideProps(context) {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await getSession({ req: context.req });
   if (!session) {
     return {
@@ -266,7 +267,7 @@ export async function getServerSideProps(context) {
   return {
     props: { session },
   };
-}
+};
 
 export default Home;
 

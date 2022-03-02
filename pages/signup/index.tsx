@@ -1,6 +1,4 @@
 import Link from "next/link";
-
-import { signIn } from "next-auth/client";
 import React, { useState } from "react";
 
 type IUser = {
