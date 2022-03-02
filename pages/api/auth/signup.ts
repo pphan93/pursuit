@@ -8,14 +8,17 @@ type Data = {
 import { hash } from "bcryptjs";
 
 async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
+  //only allow POST method
   if (req.method === "POST") {
     const { email, password, firstName, lastName } = req.body;
 
+    //quick validations
     if (!email || !email.includes("@") || !password) {
       res.status(422).json({ message: "Invalid Data" });
       return;
     }
 
+    //connect to mongo atlas
     const client: MongoClient = new MongoClient(
       `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@${process.env.MONGO_CLUSTER}/${process.env.MONGO_DB}?retryWrites=true&w=majority`
     );
@@ -24,6 +27,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
 
     const db = client.db();
 
+    //check if email exist before creating new useer
     const checkExisting = await db
       .collection("Users")
       .findOne({ email: email });
@@ -34,6 +38,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
       return;
     }
 
+    //using bcrypt to hash the password
     const status = await db.collection("Users").insertOne({
       firstName,
       lastName,
@@ -44,11 +49,6 @@ async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
     res.status(201).json({ message: "User created", ...status });
 
     client.close();
-
-    // const client = await new MongoClient.connect(
-    //   `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@${process.env.MONGO_CLUSTER}/${process.env.MONGO_DB}?retryWrites=true&w=majority`,
-    //   { useNewUrlParser: true, useUnifiedTopology: true }
-    // );
   } else {
     res.status(500).json({ message: "Route not valid" });
   }

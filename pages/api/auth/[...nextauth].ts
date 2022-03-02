@@ -3,10 +3,21 @@ import NextAuth from "next-auth";
 import { MongoClient } from "mongodb";
 import { compare } from "bcryptjs";
 import CredentialsProvider from "next-auth/providers/credentials";
+import { signIn } from "next-auth/react";
 
 export default NextAuth({
   session: {
     strategy: "jwt",
+  },
+  jwt: {
+    // A secret to use for key generation (you should set this explicitly)
+    secret: process.env.SECRET,
+    // Set to true to use encryption (default: false)
+    // encryption: true,
+    // You can define your own encode/decode functions for signing and encryption
+    // if you want to override the default behaviour.
+    // encode: async ({ secret, token, maxAge }) => {},
+    // decode: async ({ secret, token, maxAge }) => {},
   },
   providers: [
     CredentialsProvider({
@@ -41,7 +52,9 @@ export default NextAuth({
 
         if (!user) {
           client.close();
-          throw new Error("No user found!");
+          throw new Error(
+            `Could not login! Please check email or password &email=${email}`
+          );
         }
 
         //check if password match by comparing hash
@@ -49,7 +62,9 @@ export default NextAuth({
 
         if (!isValid) {
           client.close();
-          throw new Error("Could not log you in!");
+          throw new Error(
+            `Could not login! Please check email or password &email=${email}`
+          );
         }
 
         client.close();
@@ -59,4 +74,15 @@ export default NextAuth({
       },
     }),
   ],
+  pages: {
+    error: "/login",
+  },
+  //   callbacks: {
+
+  //   },
+  // pages: [
+  //     signIn("credentials", {
+  //         redirect: true
+  //     })
+  // ]
 });
