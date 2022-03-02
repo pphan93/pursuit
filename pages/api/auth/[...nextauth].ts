@@ -21,13 +21,13 @@ export default NextAuth({
         },
       },
       async authorize(credentials) {
-        console.log(credentials?.password);
+        // console.log(credentials?.password);
 
-        // const {email, password} = credentials
-
+        //info past from frontend
         const email = credentials?.email;
-        const password = credentials?.password!;
+        const password = credentials?.password || "";
 
+        //connect to mongo atlas to get user info and compare password hash
         const client: MongoClient = new MongoClient(
           `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@${process.env.MONGO_CLUSTER}/${process.env.MONGO_DB}?retryWrites=true&w=majority`
         );
@@ -36,19 +36,15 @@ export default NextAuth({
 
         const db = client.db();
 
-        const user = await db
-          .collection("Users")
-          .findOne({ email: credentials?.email });
-
-        // const user = await usersCollection.findOne({
-        //   email: credentials.email,
-        // });
+        //get info that match email
+        const user = await db.collection("Users").findOne({ email: email });
 
         if (!user) {
           client.close();
           throw new Error("No user found!");
         }
 
+        //check if password match by comparing hash
         const isValid = await compare(password, user.password);
 
         if (!isValid) {
@@ -57,6 +53,8 @@ export default NextAuth({
         }
 
         client.close();
+
+        //return email as token
         return { email: user.email };
       },
     }),
