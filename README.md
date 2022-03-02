@@ -10,23 +10,24 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/github_username/repo_name">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+  <a href="https://github.com/pphan93/pursuit">
+    <img src="public/status-up.svg" alt="Logo" width="80" height="80" style="color:white;">
   </a>
 
-<h3 align="center">project_title</h3>
+<h3 align="center">Pursuit</h3>
 
   <p align="center">
-    project_description
+    Start PURSUITING your dream jobs!
+At Pursuit we made it an one stop shop for your jobs hunting. We offered many features that was made with job applicatons tracking in mind. Give Pursuit a try for free.
     <br />
-    <a href="https://github.com/github_username/repo_name"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/pphan93/pursuit"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/github_username/repo_name">View Demo</a>
+    <a href="https://github.com/pphan93/pursuit">View Demo</a>
     ·
-    <a href="https://github.com/github_username/repo_name/issues">Report Bug</a>
+    <a href="https://github.com/pphan93/pursuit/issues">Report Bug</a>
     ·
-    <a href="https://github.com/github_username/repo_name/issues">Request Feature</a>
+    <a href="https://github.com/pphan93/pursuit/issues">Request Feature</a>
   </p>
 </div>
 
@@ -60,7 +61,7 @@
 
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+[![Product Name Screen Shot][product-screenshot]](https://github.com/pphan93/pursuit/)
 
 Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `github_username`, `repo_name`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `project_title`, `project_description`
 
