@@ -70,13 +70,21 @@ export default NextAuth({
         client.close();
 
         //return email as token
-        return { email: user.email };
+        return {
+          email: user.email,
+          name: `${user.firstName} ${user.lastName}`,
+        };
       },
     }),
   ],
-  pages: {
-    error: "/login",
+  callbacks: {
+    session({ session, token, user }) {
+      return session;
+    },
   },
+  // pages: {
+  //   error: "/login",
+  // },
   //   callbacks: {
 
   //   },

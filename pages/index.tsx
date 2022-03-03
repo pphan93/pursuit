@@ -255,6 +255,8 @@ const Home: NextPage = () => {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await getSession({ req: context.req });
+
+  console.log(session);
   if (!session) {
     return {
       redirect: {
@@ -271,6 +273,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
 export default Home;
 
-Home.getLayout = function getLayout(page: ReactElement) {
-  return <Layout>{page}</Layout>;
-};
+// Home.getLayout = function getLayout(page: ReactElement) {
+//   return <Layout>{page}</Layout>;
+// };
