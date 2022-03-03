@@ -1,6 +1,7 @@
 import { AddSquare, Filter, Sort } from "iconsax-react";
 import { MouseEvent, useState } from "react";
 import TableRow from "./TableRow";
+import { useRouter } from "next/router";
 
 import ArrowLeft from "../Icon/ArrowLeft";
 import ArrowRight from "../Icon/ArrowRight";
@@ -21,6 +22,8 @@ interface Props {
 
 const Table: React.FC<Props> = ({ jobApps }) => {
   const [currentPage, setCurrentPage] = useState(1);
+
+  const router = useRouter();
   let pageLimit = 10;
   let pagesNumber: number = Math.round(jobApps.length / pageLimit);
 
@@ -78,6 +81,9 @@ const Table: React.FC<Props> = ({ jobApps }) => {
           {/* Side Button */}
           <div className="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
             <button
+              onClick={() => {
+                router.push("/new");
+              }}
               className=" text-black active:bg-indigo-600 text-xs font-bold px-3 py-1 hover:bg-gray-100 group rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
               type="button"
             >

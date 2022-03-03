@@ -1,4 +1,4 @@
-import { MongoClient } from "mongodb";
+import { connectToDatabase } from "../../../lib/db";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 type Data = {
@@ -18,12 +18,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
       return;
     }
 
-    //connect to mongo atlas
-    const client: MongoClient = new MongoClient(
-      `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@${process.env.MONGO_CLUSTER}/${process.env.MONGO_DB}?retryWrites=true&w=majority`
-    );
-
-    await client.connect();
+    const client = await connectToDatabase();
 
     const db = client.db();
 
