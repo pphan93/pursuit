@@ -15,6 +15,6 @@ const NewApplication = () => {
 
 export default NewApplication;
 
-NewApplication.getLayout = function getLayout(page: ReactElement) {
-  return <Layout>{page}</Layout>;
-};
+// NewApplication.getLayout = function getLayout(page: ReactElement) {
+//   return page;
+// };

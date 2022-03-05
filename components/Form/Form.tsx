@@ -20,7 +20,7 @@ const Form = () => {
     jobTitle: "",
     jobUrl: "",
     companyLocation: "",
-    applicationStatus: "",
+    applicationStatus: "Applied",
     deadline: "",
     jobDescription: "",
     estimatedSalary: 0,
@@ -56,10 +56,10 @@ const Form = () => {
 
     const data = await res.json();
     const statusCode = res.status;
-    console.log(statusCode);
+    // console.log(data);
 
     if (statusCode === 201) {
-      router.push(`/jobdetail/${data.id}`);
+      router.push(`/jobdetail/${data.insertedId}`);
     }
   };
   return (
