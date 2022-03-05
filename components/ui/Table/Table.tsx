@@ -7,7 +7,7 @@ import ArrowLeft from "../Icon/ArrowLeft";
 import ArrowRight from "../Icon/ArrowRight";
 
 interface JobApp {
-  id: string;
+  _id: string;
   logo: string;
   jobPosition: string;
   lastUpdated: string;
@@ -23,9 +23,18 @@ interface Props {
 const Table: React.FC<Props> = ({ jobApps }) => {
   const [currentPage, setCurrentPage] = useState(1);
 
+  // console.log("Table ");
+  // console.log(jobApps[0]._id);
   const router = useRouter();
   let pageLimit = 10;
-  let pagesNumber: number = Math.round(jobApps.length / pageLimit);
+
+  let pagesNumber: number;
+
+  if (Math.round(jobApps.length / pageLimit) < 1) {
+    pagesNumber = 1;
+  } else {
+    pagesNumber = Math.round(jobApps.length / pageLimit);
+  }
 
   //Change pages forward and backward
   function nextPage() {
@@ -145,14 +154,17 @@ const Table: React.FC<Props> = ({ jobApps }) => {
             {getCurrentData().map((job) => {
               return (
                 <TableRow
-                  key={job.id}
-                  id={job.id}
-                  jobPosition={job.jobPosition}
-                  logo={job.logo}
-                  lastUpdated={job.lastUpdated}
-                  company={job.company}
-                  status={job.status}
-                  dateSaved={job.dateSaved}
+                  key={job._id}
+                  id={job._id}
+                  jobPosition={job.jobTitle}
+                  logo={`https://logo.clearbit.com/${job.company.name}.com`}
+                  lastUpdated={job.updatedDate}
+                  company={job.company.name}
+                  status="OFFER"
+                  dateSaved={new Date(job.createdDate).toLocaleDateString(
+                    "en-us",
+                    { year: "numeric", month: "short", day: "numeric" }
+                  )}
                 />
               );
             })}

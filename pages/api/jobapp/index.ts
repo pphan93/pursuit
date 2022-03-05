@@ -8,6 +8,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 
 type Data = {
   message: string;
+  data: any[] | {} | null;
 };
 
 export default async function handler(
@@ -18,17 +19,17 @@ export default async function handler(
 
   if (token) {
     //signed in
-    console.log("JSON Web Token", token);
+
+    // console.log("JSON Web Token", token);
     if (req.method === "POST") {
+      // console.log("api Request");
+      // console.log(req.body.userInput);
       const client = await connectToDatabase();
 
       const db = client.db();
-      console.log("api Request");
-      // console.log(req.body.userInput);
-
       const inputData = req.body.userInput;
 
-      console.log(req.body.userInput);
+      // console.log(req.body.userInput);
 
       let data = {};
 
@@ -49,25 +50,30 @@ export default async function handler(
             createdDate: new Date(),
           },
         ],
+        createdDate: new Date(),
+        updatedDate: new Date(),
       };
 
-      // console.log(data);
-
-      //using bcrypt to hash the password
+      //insert to mongodb
       const status = await db.collection("JobApplications").insertOne(data);
 
-      res.status(201).json({ message: "Application created", ...status });
+      res.status(201).json({ message: "Application created", data: status });
 
       client.close();
+    } else if (req.method === "GET") {
+      const client = await connectToDatabase();
 
-      // res.status(201).json({ message: "job created" });
-    } else {
-      // res.status(200).json({ name: "John Doe" });
+      const db = client.db();
+      const data1 = await db.collection("JobApplications").find({}).toArray();
+
+      console.log("------------------------------");
+      console.log(data1);
+      res.status(200).json({ message: "Successfull", data: data1 });
+      client.close();
     }
   } else {
-    res.status(401).json({ message: "Unauthorized" });
+    res.status(401).json({ message: "Unauthorized", data: null });
   }
 
   res.end();
-  // res.status(200).json({ name: 'John Doe' })
 }

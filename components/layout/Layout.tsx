@@ -1,6 +1,4 @@
 // import MainNavBar from "./MainNavBar";
-
-import Image from "next/image";
 import { useState } from "react";
 
 import Footer from "./Footer";

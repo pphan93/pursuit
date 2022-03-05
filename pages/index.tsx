@@ -3,9 +3,11 @@ import Head from "next/head";
 import Image from "next/image";
 import Layout from "../components/layout/Layout";
 import Table from "../components/ui/Table/Table";
-import type { ReactElement } from "react";
+import { ReactElement, useEffect } from "react";
 import { getSession } from "next-auth/react";
 import { GetServerSideProps } from "next";
+import useSWR from "swr";
+import Loading from "../components/ui/Loading";
 
 // import Layout from "../components/layout/Layout";
 // import styles from "../styles/Home.module.css";
@@ -249,8 +251,30 @@ const jobApps = [
   // More people...
 ];
 
+export async function fetcher<JSON = any>(
+  input: RequestInfo,
+  init?: RequestInit
+): Promise<JSON> {
+  const res = await fetch(input, init);
+  return res.json();
+}
+
+// const fetcher = (url) => fetch(url).then((r) => r.json());
+
 const Home: NextPage = () => {
-  return <Table jobApps={jobApps} />;
+  const { data, error } = useSWR("/api/jobapp", fetcher);
+
+  const message: any = data;
+  if (error) return <div>failed to load</div>;
+  if (!data) return <Loading />;
+  // console.log(message.data);
+
+  return (
+    <>
+      {/* <Loading /> */}
+      <Table jobApps={message.data} />
+    </>
+  );
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {

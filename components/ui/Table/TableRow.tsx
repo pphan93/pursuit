@@ -10,6 +10,13 @@ type JobApp = {
 };
 
 const TableRow = (props: JobApp) => {
+  console.log(Math.round((new Date() - new Date(props.lastUpdated)) / 3600000));
+
+  let lastUpdated =
+    "Last updated " +
+    Math.round((new Date() - new Date(props.lastUpdated)) / 3600000) +
+    " hours ago";
+
   return (
     <tr id={props.id}>
       <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-blueGray-700 ">
@@ -22,9 +29,7 @@ const TableRow = (props: JobApp) => {
             <div className="text-sm leading-5 font-medium text-gray-900">
               {props.jobPosition}
             </div>
-            <div className="text-xs leading-5 text-gray-500">
-              {props.lastUpdated}
-            </div>
+            <div className="text-xs leading-5 text-gray-500">{lastUpdated}</div>
           </div>
         </div>
       </th>
