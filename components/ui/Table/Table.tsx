@@ -9,10 +9,12 @@ import ArrowRight from "../Icon/ArrowRight";
 interface JobApp {
   _id: string;
   logo: string;
-  jobPosition: string;
-  lastUpdated: string;
-  company: string;
-  dateSaved: string;
+  jobTitle: string;
+  updatedDate: Date;
+  company: {
+    name: string;
+  };
+  createdDate: Date;
   status: string;
 }
 
@@ -155,11 +157,11 @@ const Table: React.FC<Props> = ({ jobApps }) => {
               return (
                 <TableRow
                   key={job._id}
-                  id={job._id}
-                  jobPosition={job.jobTitle}
+                  _id={job._id}
+                  jobTitle={job.jobTitle}
                   logo={`https://logo.clearbit.com/${job.company.name}.com`}
-                  lastUpdated={job.updatedDate}
-                  company={job.company.name}
+                  updatedDate={job.updatedDate}
+                  companyName={job.company.name}
                   status="OFFER"
                   dateSaved={new Date(job.createdDate).toLocaleDateString(
                     "en-us",
