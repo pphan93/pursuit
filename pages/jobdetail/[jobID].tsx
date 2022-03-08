@@ -4,8 +4,23 @@ import Layout from "../../components/layout/Layout";
 import ArrowsStepper from "../../components/ui/ArrowsStepper";
 import RatingStars from "../../components/ui/Icon/RatingStars";
 import styles from "./[jobID].module.css";
+import useSWR from "swr";
+import { useRouter } from "next/router";
+
+export async function fetcher<JSON = any>(
+  input: RequestInfo,
+  init?: RequestInit
+): Promise<JSON> {
+  const res = await fetch(input, init);
+  return res.json();
+}
 
 const JobDetail = () => {
+  const router = useRouter();
+  const { jobID } = router.query;
+  const { data, error } = useSWR(`/api/jobapp/${jobID}`, fetcher);
+
+  console.log(jobID);
   let rating = 3;
   let styleName = [];
 
@@ -16,6 +31,8 @@ const JobDetail = () => {
       styleName.push("text-gray-500");
     }
   }
+
+  console.log(data);
 
   return (
     // <div className="w-full xl:w-8/12 mb-12 xl:mb-0 px-4 mx-auto mt-5">
@@ -62,7 +79,3 @@ const JobDetail = () => {
 };
 
 export default JobDetail;
-
-JobDetail.getLayout = function getLayout(page: ReactElement) {
-  return <Layout>{page}</Layout>;
-};

@@ -1,3 +1,5 @@
+import { useRouter } from "next/router";
+
 type JobApp = {
   _id: string;
   logo: string;
@@ -9,9 +11,14 @@ type JobApp = {
 };
 
 const TableRow = (props: JobApp) => {
-  console.log(
-    Math.round((+new Date() - +new Date(props.updatedDate)) / 3600000)
-  );
+  const router = useRouter();
+  // console.log(
+  //   Math.round((+new Date() - +new Date(props.updatedDate)) / 3600000)
+  // );
+
+  const onClickHandler = (id: string) => {
+    router.push({ pathname: `/jobdetail/[appID]`, query: { appID: id } });
+  };
 
   let lastUpdated =
     "Last updated " +
@@ -27,7 +34,12 @@ const TableRow = (props: JobApp) => {
           </div>
 
           <div className="ml-4">
-            <div className="text-sm leading-5 font-medium text-gray-900">
+            <div
+              className="text-sm leading-5 font-medium text-gray-900 cursor-pointer"
+              onClick={() => {
+                onClickHandler(props._id);
+              }}
+            >
               {props.jobTitle}
             </div>
             <div className="text-xs leading-5 text-gray-500">{lastUpdated}</div>

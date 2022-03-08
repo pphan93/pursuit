@@ -86,22 +86,12 @@ const Table: React.FC<Props> = ({ query }) => {
     setCurrentPage(clickedOnPageNumber);
   };
 
-  // //show only 10 items at once base on the pagination
-  // function getCurrentData() {
-  //   return jobApps.slice(
-  //     currentPage * pageLimit - pageLimit,
-  //     currentPage * pageLimit
-  //   );
-  // }
-
   // // get array of numbers for page number
   const getPaginationGroup = () => {
     // let start = Math.floor((currentPage - 1) / pageLimit) * pageLimit;
     let start = 0;
     return new Array(pagesNumber).fill(null).map((_, idx) => start + idx + 1);
   };
-
-  // console.log(getPaginationGroup());
 
   return (
     //<div className="w-full xl:w-8/12 mb-12 xl:mb-0 px-4 mx-auto mt-5">
