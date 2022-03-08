@@ -2,40 +2,66 @@ import { AddSquare, Filter, Sort } from "iconsax-react";
 import { MouseEvent, useState } from "react";
 import TableRow from "./TableRow";
 import { useRouter } from "next/router";
+import useSWR from "swr";
 
 import ArrowLeft from "../Icon/ArrowLeft";
 import ArrowRight from "../Icon/ArrowRight";
+import Loading from "../Loading";
 
-interface JobApp {
-  _id: string;
-  logo: string;
-  jobTitle: string;
-  updatedDate: Date;
-  company: {
-    name: string;
-  };
-  createdDate: Date;
-  status: string;
-}
+// interface JobApp {
+//   _id: string;
+//   logo: string;
+//   jobTitle: string;
+//   updatedDate: Date;
+//   company: {
+//     name: string;
+//   };
+//   createdDate: Date;
+//   status: string;
+// }
+
+// interface JobApp {
+//   query: string;
+// }
 
 interface Props {
-  jobApps: JobApp[];
+  query: string;
 }
 
-const Table: React.FC<Props> = ({ jobApps }) => {
+export async function fetcher<JSON = any>(
+  input: RequestInfo,
+  init?: RequestInit
+): Promise<JSON> {
+  const res = await fetch(input, init);
+  return res.json();
+}
+
+const Table: React.FC<Props> = ({ query }) => {
   const [currentPage, setCurrentPage] = useState(1);
+  const router = useRouter();
+  const { data, error } = useSWR(
+    `/api/jobapp?page=${currentPage}&option=${query}`,
+    fetcher
+  );
+
+  // console.log(query);
+
+  const message: any = data;
+  if (error) return <div>failed to load</div>;
+  if (!data) return <Loading />;
+
+  console.log(message);
 
   // console.log("Table ");
   // console.log(jobApps[0]._id);
-  const router = useRouter();
-  let pageLimit = 10;
+  // let pageLimit = 10;
 
   let pagesNumber: number;
 
-  if (Math.round(jobApps.length / pageLimit) < 1) {
+  if (message.total < 1) {
     pagesNumber = 1;
   } else {
-    pagesNumber = Math.round(jobApps.length / pageLimit);
+    pagesNumber = message.total;
   }
 
   //Change pages forward and backward
@@ -60,22 +86,22 @@ const Table: React.FC<Props> = ({ jobApps }) => {
     setCurrentPage(clickedOnPageNumber);
   };
 
-  //show only 10 items at once base on the pagination
-  function getCurrentData() {
-    return jobApps.slice(
-      currentPage * pageLimit - pageLimit,
-      currentPage * pageLimit
-    );
-  }
+  // //show only 10 items at once base on the pagination
+  // function getCurrentData() {
+  //   return jobApps.slice(
+  //     currentPage * pageLimit - pageLimit,
+  //     currentPage * pageLimit
+  //   );
+  // }
 
-  // get array of numbers for page number
+  // // get array of numbers for page number
   const getPaginationGroup = () => {
     // let start = Math.floor((currentPage - 1) / pageLimit) * pageLimit;
     let start = 0;
     return new Array(pagesNumber).fill(null).map((_, idx) => start + idx + 1);
   };
 
-  console.log(getPaginationGroup());
+  // console.log(getPaginationGroup());
 
   return (
     //<div className="w-full xl:w-8/12 mb-12 xl:mb-0 px-4 mx-auto mt-5">
@@ -153,7 +179,7 @@ const Table: React.FC<Props> = ({ jobApps }) => {
 
           {/* Items in Table - table rows */}
           <tbody>
-            {getCurrentData().map((job) => {
+            {message.data.map((job) => {
               return (
                 <TableRow
                   key={job._id}
