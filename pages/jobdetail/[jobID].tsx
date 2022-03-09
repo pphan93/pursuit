@@ -7,6 +7,33 @@ import styles from "./[jobID].module.css";
 import useSWR from "swr";
 import { useRouter } from "next/router";
 
+const statusData = [
+  {
+    name: "Applied",
+    status: "Completed",
+  },
+  {
+    name: "Interview 1",
+    status: "Active",
+  },
+  {
+    name: "Take Home",
+    status: null,
+  },
+  {
+    name: "Interview 2",
+    status: null,
+  },
+  {
+    name: "Offered",
+    status: null,
+  },
+  {
+    name: "Accepted",
+    status: null,
+  },
+];
+
 export async function fetcher<JSON = any>(
   input: RequestInfo,
   init?: RequestInit
@@ -18,12 +45,17 @@ export async function fetcher<JSON = any>(
 const JobDetail = () => {
   const router = useRouter();
   const { jobID } = router.query;
+  const [status, setStatus] = useState(statusData);
   const { data, error } = useSWR(`/api/jobapp/${jobID}`, fetcher);
+
+  if (error) return <div>failed to load</div>;
+  if (!data) return <div>Loading</div>;
 
   console.log(jobID);
   let rating = 3;
   let styleName = [];
 
+  //Calculate the rating stars
   for (let star = 0; star < 5; star++) {
     if (star + 1 <= rating) {
       styleName.push("text-yellow-500");
@@ -32,7 +64,23 @@ const JobDetail = () => {
     }
   }
 
-  console.log(data);
+  console.log(data.data);
+
+  const onClickHandler = (e) => {
+    //progress in the steppers
+    setStatus((existingItems) => {
+      const current = existingItems.findIndex(
+        (item) => item.name === e.target.textContent
+      );
+      return existingItems.map((item, index) => {
+        return item.name === e.target.textContent
+          ? { ...item, status: "Active" }
+          : current < index
+          ? { ...item, status: null }
+          : { ...item, status: "Completed" };
+      });
+    });
+  };
 
   return (
     // <div className="w-full xl:w-8/12 mb-12 xl:mb-0 px-4 mx-auto mt-5">
@@ -42,17 +90,17 @@ const JobDetail = () => {
       <div className="flex flex-wrap items-center">
         <div className="relative w-full  max-w-full flex-grow flex-1">
           <h3 className="font-semibold text-base md:text-lg lg:text-2xl text-blueGray-700">
-            Software Engineer
+            {data.data.jobTitle}
           </h3>
           <p className="font-semibold text-sm md:text-base text-blueGray-700">
-            Google
+            {data.data.company.name}
           </p>
         </div>
 
         <div className="flex items-center">
           <img
             className="h-8 w-8 rounded-full mr-3"
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/120px-Google_%22G%22_Logo.svg.png"
+            src={`https://logo.clearbit.com/${data.data.company.name}.com`}
           ></img>
 
           {/* Show the star for the company rating */}
@@ -67,9 +115,9 @@ const JobDetail = () => {
         </div>
       </div>
       <div className="w-full mt-5 mb-5">
-        <ArrowsStepper />
+        <ArrowsStepper status={status} onClickArrow={onClickHandler} />
       </div>
-      <Form />
+      {data ? <Form data={data.data} /> : null}
     </div>
     // </div> */
 

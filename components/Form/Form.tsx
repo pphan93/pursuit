@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import JobDetail from "../../pages/jobdetail/[jobID]";
 
 //declare a type for user input
 type IInfo = {
@@ -14,7 +15,7 @@ type IInfo = {
   officialSalary: number;
 };
 
-const Form = () => {
+const Form = ({ data }) => {
   const [userInput, setUserInput] = useState<IInfo>({
     company: "",
     jobTitle: "",
@@ -28,6 +29,21 @@ const Form = () => {
   } as IInfo);
 
   const router = useRouter();
+
+  useEffect(() => {
+    if (data) {
+      setUserInput((prevItem) => ({
+        ...prevItem,
+        company: data.company.name,
+        jobTitle: data.jobTitle,
+        jobUrl: data.jobUrl,
+        companyLocation: data.company.location,
+        deadline: data.deadline,
+        officialSalary: data.officialSalary,
+        jobDescription: data.jobDescription,
+      }));
+    }
+  }, [data]);
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
