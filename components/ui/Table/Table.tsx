@@ -176,7 +176,7 @@ const Table: React.FC<Props> = ({ query }) => {
                   _id={job._id}
                   jobTitle={job.jobTitle}
                   logo={`https://logo.clearbit.com/${job.company.name}.com`}
-                  updatedDate={job.updatedDate}
+                  updatedDate={job.lastModified}
                   companyName={job.company.name}
                   status="OFFER"
                   dateSaved={new Date(job.createdDate).toLocaleDateString(

@@ -1,6 +1,11 @@
 import styles from "./ArrowsStepper.module.css";
 
-const ArrowsStepper = (props) => {
+type status = {
+  status: [{ status: string; name: string }];
+  onClickArrow: () => void;
+};
+
+const ArrowsStepper = (props: status) => {
   return (
     <div
       className={`${styles["arrow-steps"]} ${styles.clearfix} hidden md:block`}

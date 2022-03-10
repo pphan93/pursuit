@@ -63,7 +63,7 @@ export default async function handler(
         applicationStatus: [
           {
             name: inputData.applicationStatus,
-            status: ,
+            status: "Active",
             createdDate: new Date(),
           },
         ],

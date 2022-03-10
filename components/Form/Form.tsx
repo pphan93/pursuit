@@ -15,7 +15,24 @@ type IInfo = {
   officialSalary: number;
 };
 
-const Form = ({ data }) => {
+type Props = {
+  data: {
+    company: {
+      name: string;
+      location: string;
+    };
+    jobTitle: string;
+    jobUrl: string;
+    companyLocation: string;
+    applicationStatus: string;
+    deadline: string;
+    jobDescription: string;
+    estimatedSalary: number;
+    officialSalary: number;
+  };
+};
+
+const Form: React.FC<Props> = ({ data }) => {
   const [userInput, setUserInput] = useState<IInfo>({
     company: "",
     jobTitle: "",
@@ -52,6 +69,14 @@ const Form = ({ data }) => {
   };
 
   const onChangeSelectHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const { value, name } = e.target;
+
+    setUserInput((prevItem) => ({ ...prevItem, [name]: value }));
+  };
+
+  const onChangeTextAreaHandler = (
+    e: React.ChangeEvent<HTMLTextAreaElement>
+  ) => {
     const { value, name } = e.target;
 
     setUserInput((prevItem) => ({ ...prevItem, [name]: value }));
@@ -263,7 +288,7 @@ const Form = ({ data }) => {
               className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
               rows={3}
               value={userInput.jobDescription}
-              onChange={onChangeHandler}
+              onChange={onChangeTextAreaHandler}
             ></textarea>
           </div>
         </div>
