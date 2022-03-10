@@ -46,7 +46,7 @@ export default async function handler(
       // const db = client.db();
 
       //   console.log(req.query.appID);
-      const id = req.query.appID;
+      const id: any = req.query.appID;
 
       const o_id: ObjectId = new ObjectId(id);
 
@@ -70,20 +70,19 @@ export default async function handler(
       });
       client.close();
     } else if (req.method === "PUT") {
-      const id = req.query.appID;
+      const id: any = req.query.appID;
 
       const o_id: ObjectId = new ObjectId(id);
 
       const body = req.body.updatedItem;
-      const data1 = await db
-        .collection("JobApplications")
-        .findOneAndUpdate(
-          { _id: o_id },
-          {
-            $set: { applicationStatus: body },
-            $currentDate: { lastModified: true },
-          }
-        );
+      const data1 = await db.collection("JobApplications").findOneAndUpdate(
+        { _id: o_id },
+        {
+          $set: { applicationStatus: body },
+          //@ts-ignore
+          $currentDate: { lastModified: true },
+        }
+      );
 
       res
         .status(200)

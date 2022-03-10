@@ -29,7 +29,7 @@ type Props = {
     jobDescription: string;
     estimatedSalary: number;
     officialSalary: number;
-  };
+  } | null;
 };
 
 const Form: React.FC<Props> = ({ data }) => {

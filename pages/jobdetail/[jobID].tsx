@@ -1,4 +1,11 @@
-import { useState, useCallback, useRef, ReactElement, useEffect } from "react";
+import {
+  useState,
+  useCallback,
+  useRef,
+  ReactElement,
+  useEffect,
+  ChangeEvent,
+} from "react";
 import Form from "../../components/Form/Form";
 import Layout from "../../components/layout/Layout";
 import ArrowsStepper from "../../components/ui/ArrowsStepper";
@@ -6,33 +13,6 @@ import RatingStars from "../../components/ui/Icon/RatingStars";
 import styles from "./[jobID].module.css";
 import useSWR from "swr";
 import { useRouter } from "next/router";
-
-const statusData = [
-  {
-    name: "Applied",
-    status: "Completed",
-  },
-  {
-    name: "Interview 1",
-    status: "Active",
-  },
-  {
-    name: "Take Home",
-    status: null,
-  },
-  {
-    name: "Interview 2",
-    status: null,
-  },
-  {
-    name: "Offered",
-    status: null,
-  },
-  {
-    name: "Accepted",
-    status: null,
-  },
-];
 
 export async function fetcher<JSON = any>(
   input: RequestInfo,
@@ -42,11 +22,38 @@ export async function fetcher<JSON = any>(
   return res.json();
 }
 
+interface ApiData {
+  message: string;
+  data: {
+    _id: string;
+    userId: string;
+    company: {
+      name: string;
+      location: string;
+    };
+    createdDate: Date;
+    deadline: Date;
+    estimatedSalary: number;
+  };
+  total: number;
+}
+
+// interface Error {
+//   error: string
+// }
+
+// interface API {
+//   data: ApiData,
+//   error: Error
+// }
+
 const JobDetail = () => {
   const router = useRouter();
   const { jobID } = router.query;
-  const [status, setStatus] = useState([]);
-  const { data, error } = useSWR(`/api/jobapp/${jobID}`, fetcher, {
+  const [status, setStatus] = useState<
+    { status: string | null; name: string }[]
+  >([]);
+  const { data, error }: any = useSWR(`/api/jobapp/${jobID}`, fetcher, {
     loadingTimeout: 3000,
   });
 
@@ -76,43 +83,49 @@ const JobDetail = () => {
     }
   }
 
-  console.log(data.data);
+  console.log(data);
 
-  const onClickHandler = async (e) => {
+  const onClickHandler = (value: string | null): void => {
     //progress in the steppers
 
     const existingItems = [...status];
 
     const current = existingItems.findIndex(
-      (item) => item.name === e.target.textContent
+      (item: { name: string; status: string | null }) => item.name === value
     );
-    const updatedItem = existingItems.map((item, index) => {
-      return item.name === e.target.textContent && item.name !== "Accepted"
-        ? { ...item, status: "Active" }
-        : current < index
-        ? { ...item, status: null }
-        : item.name === "Accepted"
-        ? { ...item, status: "Completed" }
-        : { ...item, status: "Completed" };
-    });
+    const updatedItem = existingItems.map(
+      (item: { name: string; status: string | null }, index) => {
+        return item.name === value && item.name !== "Accepted"
+          ? { ...item, status: "Active" }
+          : current < index
+          ? { ...item, status: null }
+          : item.name === "Accepted"
+          ? { ...item, status: "Completed" }
+          : { ...item, status: "Completed" };
+      }
+    );
 
     setStatus(updatedItem);
 
-    const res = await fetch(`/api/jobapp/${jobID}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        updatedItem,
-      }),
-    });
+    const updateStatusAPI = async () => {
+      const res = await fetch(`/api/jobapp/${jobID}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          updatedItem,
+        }),
+      });
 
-    console.log(res);
+      console.log(res);
 
-    const updateRes = await res.json();
-    const statusCode = res.status;
-    console.log(updateRes);
+      const updateRes = await res.json();
+      const statusCode = res.status;
+      console.log(updateRes);
+    };
+
+    updateStatusAPI();
 
     // if (statusCode === 201) {
     //   router.push(`/jobdetail/${data.insertedId}`);

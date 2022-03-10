@@ -1,8 +1,8 @@
 import styles from "./ArrowsStepper.module.css";
 
 type status = {
-  status: [{ status: string; name: string }];
-  onClickArrow: () => void;
+  status: { status: string | null; name: string }[];
+  onClickArrow: (value: string | null) => void;
 };
 
 const ArrowsStepper = (props: status) => {
@@ -21,7 +21,12 @@ const ArrowsStepper = (props: status) => {
         return (
           <div key={idx} className={style}>
             <span>
-              <a href="#" onClick={props.onClickArrow}>
+              <a
+                href="#"
+                onClick={(e: React.MouseEvent<HTMLAnchorElement>): void =>
+                  props.onClickArrow(e.currentTarget.textContent)
+                }
+              >
                 {item.name}
               </a>
             </span>

@@ -28,6 +28,17 @@ interface Props {
   query: string;
 }
 
+type Job = {
+  _id: string;
+  jobTitle: string;
+  company: {
+    name: string;
+    location: string;
+  };
+  lastModified: Date;
+  createdDate: Date;
+};
+
 export async function fetcher<JSON = any>(
   input: RequestInfo,
   init?: RequestInit
@@ -169,7 +180,7 @@ const Table: React.FC<Props> = ({ query }) => {
 
           {/* Items in Table - table rows */}
           <tbody>
-            {message.data.map((job) => {
+            {message.data.map((job: Job) => {
               return (
                 <TableRow
                   key={job._id}
