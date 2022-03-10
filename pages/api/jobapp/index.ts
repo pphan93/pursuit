@@ -62,12 +62,13 @@ export default async function handler(
         officialSalary: inputData.officialSalary,
         applicationStatus: [
           {
-            status: inputData.applicationStatus,
+            name: inputData.applicationStatus,
+            status: ,
             createdDate: new Date(),
           },
         ],
         createdDate: new Date(),
-        updatedDate: new Date(),
+        lastModified: new Date(),
       };
 
       //insert to mongodb

@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef, ReactElement } from "react";
+import { useState, useCallback, useRef, ReactElement, useEffect } from "react";
 import Form from "../../components/Form/Form";
 import Layout from "../../components/layout/Layout";
 import ArrowsStepper from "../../components/ui/ArrowsStepper";
@@ -45,11 +45,23 @@ export async function fetcher<JSON = any>(
 const JobDetail = () => {
   const router = useRouter();
   const { jobID } = router.query;
-  const [status, setStatus] = useState(statusData);
-  const { data, error } = useSWR(`/api/jobapp/${jobID}`, fetcher);
+  const [status, setStatus] = useState([]);
+  const { data, error } = useSWR(`/api/jobapp/${jobID}`, fetcher, {
+    loadingTimeout: 3000,
+  });
+
+  useEffect(() => {
+    if (data) {
+      setStatus(data.data.applicationStatus);
+    }
+  }, [data]);
 
   if (error) return <div>failed to load</div>;
   if (!data) return <div>Loading</div>;
+
+  // useEffect(() => {
+  //   setStatus(data.data.applicationStatus);
+  // }, [data]);
 
   console.log(jobID);
   let rating = 3;
@@ -66,20 +78,60 @@ const JobDetail = () => {
 
   console.log(data.data);
 
-  const onClickHandler = (e) => {
+  const onClickHandler = async (e) => {
     //progress in the steppers
-    setStatus((existingItems) => {
-      const current = existingItems.findIndex(
-        (item) => item.name === e.target.textContent
-      );
-      return existingItems.map((item, index) => {
-        return item.name === e.target.textContent
-          ? { ...item, status: "Active" }
-          : current < index
-          ? { ...item, status: null }
-          : { ...item, status: "Completed" };
-      });
+
+    const existingItems = [...status];
+
+    const current = existingItems.findIndex(
+      (item) => item.name === e.target.textContent
+    );
+    const updatedItem = existingItems.map((item, index) => {
+      return item.name === e.target.textContent && item.name !== "Accepted"
+        ? { ...item, status: "Active" }
+        : current < index
+        ? { ...item, status: null }
+        : item.name === "Accepted"
+        ? { ...item, status: "Completed" }
+        : { ...item, status: "Completed" };
     });
+
+    setStatus(updatedItem);
+
+    const res = await fetch(`/api/jobapp/${jobID}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        updatedItem,
+      }),
+    });
+
+    console.log(res);
+
+    const updateRes = await res.json();
+    const statusCode = res.status;
+    console.log(updateRes);
+
+    // if (statusCode === 201) {
+    //   router.push(`/jobdetail/${data.insertedId}`);
+    // }
+
+    // setStatus((existingItems) => {
+    //   const current = existingItems.findIndex(
+    //     (item) => item.name === e.target.textContent
+    //   );
+    //   return existingItems.map((item, index) => {
+    //     return item.name === e.target.textContent && item.name !== "Accepted"
+    //       ? { ...item, status: "Active" }
+    //       : current < index
+    //       ? { ...item, status: null }
+    //       : item.name === "Accepted"
+    //       ? { ...item, status: "Completed" }
+    //       : { ...item, status: "Completed" };
+    //   });
+    // });
   };
 
   return (

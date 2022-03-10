@@ -69,6 +69,25 @@ export default async function handler(
         total: null,
       });
       client.close();
+    } else if (req.method === "PUT") {
+      const id = req.query.appID;
+
+      const o_id: ObjectId = new ObjectId(id);
+
+      const body = req.body.updatedItem;
+      const data1 = await db
+        .collection("JobApplications")
+        .findOneAndUpdate(
+          { _id: o_id },
+          {
+            $set: { applicationStatus: body },
+            $currentDate: { lastModified: true },
+          }
+        );
+
+      res
+        .status(200)
+        .json({ message: "Updated successful", data: data1, total: null });
     }
   } else {
     res.status(401).json({ message: "Unauthorized", data: null, total: null });
