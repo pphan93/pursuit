@@ -150,9 +150,7 @@ const Login = () => {
               <span className="border-b w-1/5 md:w-1/4"></span>
 
               <Link href="/signup">
-                <a href="/signup" className="text-xs text-gray-500 uppercase">
-                  or sign up
-                </a>
+                <a className="text-xs text-gray-500 uppercase">or sign up</a>
               </Link>
 
               <span className="border-b w-1/5 md:w-1/4"></span>

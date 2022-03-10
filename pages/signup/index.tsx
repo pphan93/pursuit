@@ -84,7 +84,7 @@ const SignUp = () => {
               </h2>
             </Link>
             <p className="text-xl text-gray-600 text-center">
-              Let's get started!
+              Let&apos;s get started!
             </p>
             <a
               href="#"
@@ -212,9 +212,7 @@ const SignUp = () => {
             <div className="mt-4 flex items-center justify-between">
               <span className="border-b w-1/5 md:w-1/4"></span>
               <Link href="/login">
-                <a href="/login" className="text-xs text-gray-500 uppercase">
-                  or login
-                </a>
+                <a className="text-xs text-gray-500 uppercase">or login</a>
               </Link>
 
               <span className="border-b w-1/5 md:w-1/4"></span>
