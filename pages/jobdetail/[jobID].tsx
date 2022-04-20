@@ -53,9 +53,14 @@ const JobDetail = () => {
   const [status, setStatus] = useState<
     { status: string | null; name: string }[]
   >([]);
-  const { data, error }: any = useSWR(`/api/jobapp/${jobID}`, fetcher, {
-    loadingTimeout: 3000,
-  });
+
+  const { data, error }: any = useSWR(
+    jobID ? `/api/jobapp/${jobID}` : null,
+    jobID ? fetcher : null,
+    {
+      loadingTimeout: 3000,
+    }
+  );
 
   useEffect(() => {
     if (data) {
