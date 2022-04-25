@@ -82,9 +82,9 @@ const JobDetail = () => {
   //Calculate the rating stars
   for (let star = 0; star < 5; star++) {
     if (star + 1 <= rating) {
-      styleName.push("text-yellow-500");
+      styleName.push("text-yellow");
     } else {
-      styleName.push("text-gray-500");
+      styleName.push("text-prussblue");
     }
   }
 
@@ -159,10 +159,10 @@ const JobDetail = () => {
     <div className=" md:p-8 mb-6">
       <div className="flex flex-wrap items-center">
         <div className="relative w-full  max-w-full flex-grow flex-1">
-          <h3 className="font-semibold text-base md:text-lg lg:text-2xl text-blueGray-700">
+          <h3 className="font-semibold text-base md:text-lg lg:text-2xl text-prussblue">
             {data.data.jobTitle}
           </h3>
-          <p className="font-semibold text-sm md:text-base text-blueGray-700">
+          <p className="font-semibold text-sm md:text-base text-prussblue">
             {data.data.company.name}
           </p>
         </div>
@@ -178,13 +178,32 @@ const JobDetail = () => {
             return (
               <RatingStars
                 key={idx}
-                styleName={`mx-1 w-4 h-4 fill-current text-yellow-500 ${star}`}
+                styleName={`mx-1 w-4 h-4 fill-current ${star}`}
               />
             );
           })}
         </div>
       </div>
       <div className="w-full mt-5 mb-5">
+        <div className="w-full lg:w-12/12 px-4">
+          <div className="relative w-full mb-3">
+            <select
+              title="status"
+              className="visible md:hidden border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+              id="grid-state"
+              name="applicationStatus"
+              // value={userInput.applicationStatus}
+              // onChange={onChangeSelectHandler}
+            >
+              <option>Applied</option>
+              <option>Interview 1</option>
+              <option>Take Home</option>
+              <option>Interview 2</option>
+              <option>Offered</option>
+              <option>Accepted</option>
+            </select>
+          </div>
+        </div>
         <ArrowsStepper status={status} onClickArrow={onClickHandler} />
       </div>
       {data ? <Form data={data.data} /> : null}

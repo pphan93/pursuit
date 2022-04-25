@@ -19,9 +19,11 @@ const Avatar = () => {
 
     <>
       <div className="flex items-center justify-start md:justify-center">
-        <div className="mr-3 md:block hidden">
-          <p className="text-sm text-right">{session?.user.name}</p>
-          <p className="text-xs text-right">CA,USA</p>
+        <div className="mr-3  md:block hidden">
+          <p className="text-sm text-prussblue text-right">
+            {session?.user.name}
+          </p>
+          <p className="text-xs text-pblue text-right">CA,USA</p>
         </div>
         <div className="relative" x-data="{ isOpen: false }">
           <button

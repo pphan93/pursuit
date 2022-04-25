@@ -6,7 +6,7 @@ const Footer = () => {
           <li>
             <a
               href="#"
-              className="text-sm font-normal text-gray-500 hover:underline mr-4 md:mr-6"
+              className="text-sm font-normal text-prussblue hover:underline mr-4 md:mr-6"
             >
               Terms and conditions
             </a>
@@ -14,7 +14,7 @@ const Footer = () => {
           <li>
             <a
               href="#"
-              className="text-sm font-normal text-gray-500 hover:underline mr-4 md:mr-6"
+              className="text-sm font-normal text-prussblue hover:underline mr-4 md:mr-6"
             >
               Privacy Policy
             </a>
@@ -22,7 +22,7 @@ const Footer = () => {
           <li>
             <a
               href="#"
-              className="text-sm font-normal text-gray-500 hover:underline mr-4 md:mr-6"
+              className="text-sm font-normal text-prussblue hover:underline mr-4 md:mr-6"
             >
               Licensing
             </a>
@@ -30,7 +30,7 @@ const Footer = () => {
           <li>
             <a
               href="#"
-              className="text-sm font-normal text-gray-500 hover:underline mr-4 md:mr-6"
+              className="text-sm font-normal text-prussblue hover:underline mr-4 md:mr-6"
             >
               Cookie Policy
             </a>
@@ -38,7 +38,7 @@ const Footer = () => {
           <li>
             <a
               href="#"
-              className="text-sm font-normal text-gray-500 hover:underline"
+              className="text-sm font-normal text-prussblue hover:underline"
             >
               Contact
             </a>
@@ -48,7 +48,7 @@ const Footer = () => {
           <a
             title="facebook"
             href="#"
-            className="text-gray-500 hover:text-gray-900"
+            className="text-prussblue hover:text-gray-900"
           >
             <svg
               className="h-5 w-5"
@@ -66,7 +66,7 @@ const Footer = () => {
           <a
             title="instagram"
             href="#"
-            className="text-gray-500 hover:text-gray-900"
+            className="text-prussblue hover:text-gray-900"
           >
             <svg
               className="h-5 w-5"
@@ -84,7 +84,7 @@ const Footer = () => {
           <a
             title="twitter"
             href="#"
-            className="text-gray-500 hover:text-gray-900"
+            className="text-prussblue hover:text-gray-900"
           >
             <svg
               className="h-5 w-5"
@@ -98,7 +98,7 @@ const Footer = () => {
           <a
             title="github"
             href="#"
-            className="text-gray-500 hover:text-gray-900"
+            className="text-prussblue hover:text-gray-900"
           >
             <svg
               className="h-5 w-5"
@@ -116,7 +116,7 @@ const Footer = () => {
           <a
             title="site"
             href="#"
-            className="text-gray-500 hover:text-gray-900"
+            className="text-prussblue hover:text-gray-900"
           >
             <svg
               className="h-5 w-5"
@@ -133,7 +133,7 @@ const Footer = () => {
           </a>
         </div>
       </footer>
-      <p className="text-center text-sm text-gray-500 my-10">
+      <p className="text-center text-sm text-prussblue my-10">
         &copy; 2022 . All rights reserved.
       </p>
     </>

@@ -18,3 +18,7 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.star-yellow {
+  color: #f1c644 !important;
+}

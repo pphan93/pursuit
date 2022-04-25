@@ -9,6 +9,10 @@
 
 /* Responsive Arrow Progress Bar */
 
+.test {
+  color: #f1c644 !important;
+}
+
 .clearfix:after {
   clear: both;
   content: "";

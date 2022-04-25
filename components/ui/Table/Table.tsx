@@ -111,7 +111,7 @@ const Table: React.FC<Props> = ({ query }) => {
       <div className="rounded-t mb-0 px-4 pt-6 pb-8 border-0">
         <div className="flex flex-wrap items-center">
           <div className="relative w-full px-4 max-w-full flex-grow flex-1">
-            <h3 className="font-semibold text-base text-blueGray-700">
+            <h3 className="font-semibold text-base text-prussblue">
               All Job Applications
             </h3>
           </div>
@@ -125,7 +125,7 @@ const Table: React.FC<Props> = ({ query }) => {
               className=" text-black active:bg-indigo-600 text-xs font-bold px-3 py-1 hover:bg-gray-100 group rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
               type="button"
             >
-              <span className="flex items-center">
+              <span className="flex items-center text-cblue">
                 <span className="pr-2 text-xs">
                   <AddSquare size="16" />
                 </span>
@@ -133,10 +133,10 @@ const Table: React.FC<Props> = ({ query }) => {
               </span>
             </button>
             <button
-              className=" text-black active:bg-indigo-600 text-xs font-bold px-3 py-1 hover:bg-gray-100 group rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+              className=" text-prussblueactive:bg-indigo-600 text-xs font-bold px-3 py-1 hover:bg-gray-100 group rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
               type="button"
             >
-              <span className="flex items-center">
+              <span className="flex items-center ">
                 <span className="pr-2">
                   <Sort size="16" />
                 </span>
@@ -144,7 +144,7 @@ const Table: React.FC<Props> = ({ query }) => {
               </span>
             </button>
             <button
-              className=" text-black active:bg-indigo-600 text-xs font-bold px-3 py-1 hover:bg-gray-100 group rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+              className=" text-prussblue active:bg-indigo-600 text-xs font-bold px-3 py-1 hover:bg-gray-100 group rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
               type="button"
             >
               <span className="flex items-center">
@@ -163,16 +163,16 @@ const Table: React.FC<Props> = ({ query }) => {
         <table className="items-center bg-transparent w-full border-collapse ">
           <thead>
             <tr>
-              <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+              <th className="px-6  text-cblue align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                 Job Position
               </th>
-              <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+              <th className="px-6  text-cblue align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                 Company
               </th>
-              <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+              <th className="px-6  text-cblue align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                 Date Saved
               </th>
-              <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+              <th className="px-6 text-cblue align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                 Status
               </th>
             </tr>

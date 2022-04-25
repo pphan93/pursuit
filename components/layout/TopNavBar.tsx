@@ -28,14 +28,14 @@ const TopNavBar = ({ onShowSideBar, showSideBar }: AppProps) => {
               id="toggleSidebarMobile"
               aria-expanded="true"
               // aria-controls="Sidebar"
-              className="lg:hidden mr-2 text-gray-600 hover:text-gray-900 cursor-pointer p-2 hover:bg-gray-100 focus:bg-gray-100 focus:ring-2 focus:ring-gray-100 rounded"
+              className="lg:hidden mr-2 text-prussblue hover:text-gray-900 cursor-pointer p-2 hover:bg-gray-100 focus:bg-gray-100 focus:ring-2 focus:ring-gray-100 rounded"
             >
               <div id="toggleSidebarMobileHamburger" className="w-6 h-6 ">
                 {showSideBar ? <CloseSquare /> : <HambergerMenu />}
               </div>
             </button>
             <Link href="/">
-              <a className="text-xl font-bold flex items-center lg:ml-2.5">
+              <a className="text-xl text-prussblue font-bold flex items-center lg:ml-2.5">
                 <div className="h-6 mr-3">
                   <Image
                     src="/status-up.svg"
@@ -63,7 +63,7 @@ const TopNavBar = ({ onShowSideBar, showSideBar }: AppProps) => {
                   type="text"
                   name="email"
                   id="topbar-search"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full pl-10 p-2.5"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-prussblue block w-full pl-10 p-2.5"
                   placeholder="Search"
                 />
               </div>
@@ -73,7 +73,7 @@ const TopNavBar = ({ onShowSideBar, showSideBar }: AppProps) => {
             <button
               id="toggleSidebarMobileSearch"
               type="button"
-              className="lg:hidden text-gray-500 hover:text-gray-900 hover:bg-gray-100 p-2 rounded-lg"
+              className="lg:hidden text-prussblue hover:text-prussblue hover:bg-gray-100 p-2 rounded-lg"
             >
               <span className="sr-only">Search</span>
               <SearchNormal1 size="20" color="#1d3557" variant="Outline" />

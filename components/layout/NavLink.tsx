@@ -10,9 +10,9 @@ const NavLink: React.FC<{ path: string; name: string }> = ({
 
   let styleName;
   if (router.pathname == path) {
-    styleName = "text-red-500";
+    styleName = "text-ired";
   } else {
-    styleName = "text-gray-900";
+    styleName = "text-prussblue";
   }
   return (
     <Link href={path}>

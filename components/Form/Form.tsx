@@ -189,11 +189,11 @@ const Form: React.FC<Props> = ({ data }) => {
         More Information
       </h6>
       <div className="flex flex-wrap">
-        <div className="w-full lg:w-12/12 px-4">
+        {/* <div className="w-full lg:w-12/12 px-4">
           <div className="relative w-full mb-3">
             <select
               title="status"
-              className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              className="visible md:hidden block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
               id="grid-state"
               name="applicationStatus"
               value={userInput.applicationStatus}
@@ -207,7 +207,7 @@ const Form: React.FC<Props> = ({ data }) => {
               <option>Accepted</option>
             </select>
           </div>
-        </div>
+        </div> */}
         <div className="w-full lg:w-4/12 px-4">
           <div className="relative w-full mb-3">
             <label
@@ -286,7 +286,7 @@ const Form: React.FC<Props> = ({ data }) => {
               title="job description"
               name="jobDescription"
               className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-              rows={3}
+              rows={20}
               value={userInput.jobDescription}
               onChange={onChangeTextAreaHandler}
             ></textarea>

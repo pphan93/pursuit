@@ -35,24 +35,24 @@ const TableRow = (props: JobApp) => {
 
           <div className="ml-4">
             <div
-              className="text-sm leading-5 font-medium text-gray-900 cursor-pointer"
+              className="text-sm leading-5 font-medium text-prussblue cursor-pointer"
               onClick={() => {
                 onClickHandler(props._id);
               }}
             >
               {props.jobTitle}
             </div>
-            <div className="text-xs leading-5 text-gray-500">{lastUpdated}</div>
+            <div className="text-xs leading-5 text-pblue">{lastUpdated}</div>
           </div>
         </div>
       </th>
-      <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 ">
+      <td className="border-t-0 px-6 text-prussblue align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 ">
         {props.companyName}
       </td>
-      <td className="border-t-0 px-6 align-center border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+      <td className="border-t-0 px-6  text-prussblue align-center border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
         {props.dateSaved}
       </td>
-      <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+      <td className="border-t-0 px-6  align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
         <span className="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
           {props.status}
         </span>

@@ -72,11 +72,11 @@ const Login = () => {
             }}
           ></div>
           <div className="w-full p-8 lg:w-1/2">
-            <h2 className="text-2xl font-semibold text-gray-700 text-center">
+            <h2 className="text-2xl font-semibold text-prussblue text-center">
               Pursuit
             </h2>
-            <p className="text-xl text-gray-600 text-center">Welcome back!</p>
-            <a
+            <p className="text-xl text-prussblue  text-center">Welcome back!</p>
+            {/* <a
               href="#"
               className="flex items-center justify-center mt-4 text-white rounded-lg shadow-md hover:bg-gray-100"
             >
@@ -87,10 +87,10 @@ const Login = () => {
                   src="https://logo.clearbit.com/linkedin.com"
                 />
               </div>
-              <h1 className="px-4 py-3 w-5/6 text-center text-gray-600 font-bold">
+              <h1 className="px-4 py-3 w-5/6 text-center text-prussblue font-bold">
                 Sign in with LinkedIn
               </h1>
-            </a>
+            </a> */}
             <div className="mt-4 flex items-center justify-between">
               <span className="border-b w-1/5 lg:w-1/4"></span>
               <a
@@ -142,7 +142,7 @@ const Login = () => {
               {loginError}
             </span>
             <div className="mt-8">
-              <button className="bg-gray-700 text-white font-bold py-2 px-4 w-full rounded hover:bg-gray-600">
+              <button className="bg-prussblue text-white font-bold py-2 px-4 w-full rounded hover:bg-gray-600">
                 Login
               </button>
             </div>
@@ -150,7 +150,7 @@ const Login = () => {
               <span className="border-b w-1/5 md:w-1/4"></span>
 
               <Link href="/signup">
-                <a className="text-xs text-gray-500 uppercase">or sign up</a>
+                <a className="text-xs text-prussblue uppercase">or sign up</a>
               </Link>
 
               <span className="border-b w-1/5 md:w-1/4"></span>
