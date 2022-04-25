@@ -13,6 +13,7 @@ import RatingStars from "../../components/ui/Icon/RatingStars";
 import styles from "./[jobID].module.css";
 import useSWR from "swr";
 import { useRouter } from "next/router";
+import Loading from "../../components/ui/Loading";
 
 export async function fetcher<JSON = any>(
   input: RequestInfo,
@@ -69,7 +70,7 @@ const JobDetail = () => {
   }, [data]);
 
   if (error) return <div>failed to load</div>;
-  if (!data) return <div>Loading</div>;
+  if (!data) return <Loading />;
 
   // useEffect(() => {
   //   setStatus(data.data.applicationStatus);
