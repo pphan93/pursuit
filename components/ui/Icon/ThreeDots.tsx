@@ -1,7 +1,4 @@
-const ThreeDots: React.FC<{ styleName: string; color: string }> = ({
-  styleName,
-  color,
-}) => {
+const ThreeDots = () => {
   return (
     <svg
       className="dropbtn"

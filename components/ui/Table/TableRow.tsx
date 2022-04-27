@@ -29,7 +29,7 @@ const TableRow = (props: JobApp) => {
     router.push({ pathname: `/jobdetail/[appID]`, query: { appID: id } });
   };
 
-  const EditDropDownHandler = (e) => {
+  const EditDropDownHandler = () => {
     setSettingButton((prevState) => !prevState);
   };
 
