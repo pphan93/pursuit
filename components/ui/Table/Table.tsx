@@ -132,6 +132,10 @@ const Table: React.FC<Props> = ({ query }) => {
     }
   };
 
+  const deleteOnHandler = async (id: string) => {
+    console.log(id);
+  };
+
   return (
     //<div className="w-full xl:w-8/12 mb-12 xl:mb-0 px-4 mx-auto mt-5">
     // <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded ">
@@ -223,6 +227,7 @@ const Table: React.FC<Props> = ({ query }) => {
                   favorite={job.favorite}
                   status="OFFER"
                   favoriteHandler={favoriteOnHandler}
+                  deleteHandler={deleteOnHandler}
                   dateSaved={new Date(job.createdDate).toLocaleDateString(
                     "en-us",
                     { year: "numeric", month: "short", day: "numeric" }

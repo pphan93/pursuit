@@ -13,6 +13,7 @@ type JobApp = {
   status: string;
   favorite: boolean;
   favoriteHandler: (id: string, favorite: boolean) => void;
+  deleteHandler: (id: string) => void;
 };
 
 const TableRow = (props: JobApp) => {
@@ -101,6 +102,9 @@ const TableRow = (props: JobApp) => {
             </div>
             <div
               tabIndex={0}
+              onClick={() => {
+                props.deleteHandler(props._id);
+              }}
               className="focus:outline-none focus:ttext-prussblue text-xs w-full hover:bg-cblue py-4 px-4 cursor-pointer hover:text-white"
             >
               <p>Delete</p>
