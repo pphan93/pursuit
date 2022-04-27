@@ -1,5 +1,5 @@
 import { getToken } from "next-auth/jwt";
-import { connectToDatabase } from "../../../lib/db";
+import { connectToDatabase } from "../../../../lib/db";
 
 // import type { ObjectId } from "mongodb";
 import { ObjectId } from "mongodb";
@@ -47,8 +47,8 @@ export default async function handler(
       // const db = client.db();
 
       //   console.log(req.query.appID);
-      const id: any = req.query.appID;
-
+      const id: any = req.query.test;
+      console.log(id);
       const o_id: ObjectId = new ObjectId(id);
 
       //   console.log(o_id);
@@ -111,14 +111,15 @@ export default async function handler(
       client.close();
     } else if (req.method === "PUT") {
       const id: any = req.query.appID;
-
+      console.log(id);
       const o_id: ObjectId = new ObjectId(id);
 
-      const body = req.body.updatedItem;
+      const body = req.body.favorite;
+      console.log(body);
       const data1 = await db.collection("JobApplications").findOneAndUpdate(
         { _id: o_id },
         {
-          $set: { applicationStatus: body },
+          $set: { favorite: body },
           //@ts-ignore
           $currentDate: { lastModified: true },
         }

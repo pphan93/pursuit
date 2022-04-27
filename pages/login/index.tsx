@@ -138,9 +138,7 @@ const Login = () => {
                 value={password}
               />
             </div>
-            <span className="mt-5 text-red-700 block sm:inline">
-              {loginError}
-            </span>
+            <span className="mt-5 text-ired block sm:inline">{loginError}</span>
             <div className="mt-8">
               <button className="bg-prussblue text-white font-bold py-2 px-4 w-full rounded hover:bg-gray-600">
                 Login

@@ -2,7 +2,7 @@ import { AddSquare, Filter, Sort } from "iconsax-react";
 import { MouseEvent, useState } from "react";
 import TableRow from "./TableRow";
 import { useRouter } from "next/router";
-import useSWR from "swr";
+import useSWR, { useSWRConfig } from "swr";
 
 import ArrowLeft from "../Icon/ArrowLeft";
 import ArrowRight from "../Icon/ArrowRight";
@@ -37,6 +37,8 @@ type Job = {
   };
   lastModified: Date;
   createdDate: Date;
+  favorite: boolean;
+  favoriteHandler: (id: string) => void;
 };
 
 export async function fetcher<JSON = any>(
@@ -48,6 +50,8 @@ export async function fetcher<JSON = any>(
 }
 
 const Table: React.FC<Props> = ({ query }) => {
+  const { mutate } = useSWRConfig();
+
   const [currentPage, setCurrentPage] = useState(1);
   const router = useRouter();
   const { data, error } = useSWR(
@@ -102,6 +106,30 @@ const Table: React.FC<Props> = ({ query }) => {
     // let start = Math.floor((currentPage - 1) / pageLimit) * pageLimit;
     let start = 0;
     return new Array(pagesNumber).fill(null).map((_, idx) => start + idx + 1);
+  };
+
+  //set favorite application or remove them
+  const favoriteOnHandler = async (id: string, favorite: boolean) => {
+    const res = await fetch("/api/jobapp/favorite?appID=" + id, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        favorite: favorite === undefined ? true : !favorite,
+      }),
+    });
+    const data = await res.json();
+    const statusCode = res.status;
+    // console.log(data);
+    console.log(statusCode);
+    if (statusCode === 200) {
+      //trigger revalidation if there changes, trigger render
+      mutate(`/api/jobapp?page=${currentPage}&option=${query}`);
+    }
+    if (statusCode === 201) {
+      router.push(`/jobdetail/${data.insertedId}`);
+    }
   };
 
   return (
@@ -175,6 +203,9 @@ const Table: React.FC<Props> = ({ query }) => {
               <th className="px-6 text-cblue align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                 Status
               </th>
+              <th className="px-6 text-cblue align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                Setting
+              </th>
             </tr>
           </thead>
 
@@ -189,7 +220,9 @@ const Table: React.FC<Props> = ({ query }) => {
                   logo={`https://logo.clearbit.com/${job.company.name}.com`}
                   updatedDate={job.lastModified}
                   companyName={job.company.name}
+                  favorite={job.favorite}
                   status="OFFER"
+                  favoriteHandler={favoriteOnHandler}
                   dateSaved={new Date(job.createdDate).toLocaleDateString(
                     "en-us",
                     { year: "numeric", month: "short", day: "numeric" }

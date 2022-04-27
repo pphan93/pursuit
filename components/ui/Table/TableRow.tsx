@@ -1,4 +1,7 @@
 import { useRouter } from "next/router";
+import { useState } from "react";
+import ThreeDots from "../Icon/ThreeDots";
+import useSWR, { useSWRConfig } from "swr";
 
 type JobApp = {
   _id: string;
@@ -8,16 +11,25 @@ type JobApp = {
   companyName: string;
   dateSaved: string;
   status: string;
+  favorite: boolean;
+  favoriteHandler: (id: string, favorite: boolean) => void;
 };
 
 const TableRow = (props: JobApp) => {
+  const { mutate } = useSWRConfig();
+
   const router = useRouter();
+  const [settingButton, setSettingButton] = useState(false);
   // console.log(
   //   Math.round((+new Date() - +new Date(props.updatedDate)) / 3600000)
   // );
 
   const onClickHandler = (id: string) => {
     router.push({ pathname: `/jobdetail/[appID]`, query: { appID: id } });
+  };
+
+  const EditDropDownHandler = (e) => {
+    setSettingButton((prevState) => !prevState);
   };
 
   let lastUpdated =
@@ -56,6 +68,45 @@ const TableRow = (props: JobApp) => {
         <span className="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
           {props.status}
         </span>
+      </td>
+      <td>
+        <div className="relative px-5 pt-2">
+          <button
+            className="focus:ring-2 rounded-md focus:outline-none"
+            onClick={EditDropDownHandler}
+            role="button"
+            aria-label="option"
+          >
+            <ThreeDots />
+          </button>
+          <div
+            className={`dropdown-content bg-white shadow w-24 absolute z-30 right-0 mr-6 ${
+              settingButton ? null : "hidden"
+            }`}
+          >
+            <div
+              tabIndex={0}
+              className="focus:outline-none focus:text-prussblue text-xs w-full hover:bg-cblue py-4 px-4 cursor-pointer hover:text-white"
+            >
+              <p>Rejected</p>
+            </div>
+            <div
+              tabIndex={0}
+              onClick={() => {
+                props.favoriteHandler(props._id, props.favorite);
+              }}
+              className="focus:outline-none focus:text-prussblue text-xs w-full hover:bg-cblue py-4 px-4 cursor-pointer hover:text-white"
+            >
+              <p>Favorite</p>
+            </div>
+            <div
+              tabIndex={0}
+              className="focus:outline-none focus:ttext-prussblue text-xs w-full hover:bg-cblue py-4 px-4 cursor-pointer hover:text-white"
+            >
+              <p>Delete</p>
+            </div>
+          </div>
+        </div>
       </td>
     </tr>
   );

@@ -13,6 +13,8 @@ type IInfo = {
   jobDescription: string;
   estimatedSalary: number;
   officialSalary: number;
+  jobLevel: string;
+  avgComp: number;
 };
 
 type Props = {
@@ -29,6 +31,8 @@ type Props = {
     jobDescription: string;
     estimatedSalary: number;
     officialSalary: number;
+    jobLevel: string;
+    avgComp: number;
   } | null;
 };
 
@@ -43,6 +47,7 @@ const Form: React.FC<Props> = ({ data }) => {
     jobDescription: "",
     estimatedSalary: 0,
     officialSalary: 0,
+    jobLevel: "",
   } as IInfo);
 
   const router = useRouter();
@@ -57,7 +62,9 @@ const Form: React.FC<Props> = ({ data }) => {
         companyLocation: data.company.location,
         deadline: data.deadline,
         officialSalary: data.officialSalary,
+        estimatedSalary: data.avgComp,
         jobDescription: data.jobDescription,
+        jobLevel: data.jobLevel,
       }));
     }
   }, [data]);
@@ -109,7 +116,7 @@ const Form: React.FC<Props> = ({ data }) => {
         Basic Information
       </h6>
       <div className="flex flex-wrap">
-        <div className="w-full lg:w-6/12 px-4">
+        <div className="w-full lg:w-4/12 px-4">
           <div className="relative w-full mb-3">
             <label
               className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
@@ -127,7 +134,7 @@ const Form: React.FC<Props> = ({ data }) => {
             />
           </div>
         </div>
-        <div className="w-full lg:w-6/12 px-4">
+        <div className="w-full lg:w-4/12 px-4">
           <div className="relative w-full mb-3">
             <label
               className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
@@ -141,6 +148,24 @@ const Form: React.FC<Props> = ({ data }) => {
               className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
               placeholder="Software Engineer"
               value={userInput.jobTitle}
+              onChange={onChangeHandler}
+            />
+          </div>
+        </div>
+        <div className="w-full lg:w-4/12 px-4">
+          <div className="relative w-full mb-3">
+            <label
+              className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+              htmlFor="jobLevel"
+            >
+              Job Level
+            </label>
+            <input
+              type="text"
+              name="jobLevel"
+              className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+              placeholder="L3"
+              value={userInput.jobLevel}
               onChange={onChangeHandler}
             />
           </div>
@@ -295,7 +320,7 @@ const Form: React.FC<Props> = ({ data }) => {
       </div>
       <div className="md:col-span-5 text-right px-4">
         <div className="inline-flex items-end">
-          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+          <button className="bg-cblue hover:bg-prussblue text-white font-bold py-2 px-4 rounded">
             Submit
           </button>
         </div>

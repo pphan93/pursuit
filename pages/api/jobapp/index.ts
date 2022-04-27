@@ -38,6 +38,8 @@ export default async function handler(
 
     const userID: ObjectId = customer!._id;
     // console.log("JSON Web Token", token);
+
+    //-----------------ADD NEW APPLICATION ---------------------//
     if (req.method === "POST") {
       // console.log("api Request");
       // console.log(req.body.userInput);
@@ -80,30 +82,42 @@ export default async function handler(
 
       client.close();
 
-      //---------------GET METHOD------------------////////
+      //---------------GET ALL APPLICATIONS------------------////////
     } else if (req.method === "GET") {
       // const client = await connectToDatabase();
 
       // const db = client.db();
 
       console.log(req.query);
+
+      //PAGINATION
       const page = +req.query.page;
 
+      //OPTIONS
+      const option = req.query.option;
+      let query;
+      if (option === "All") {
+        query = { userId: userID };
+      } else {
+        query = { userId: userID, favorite: true };
+      }
+
+      //GET TOTAL APPS TO DETERMINED THE PAGINATION
       const total = await db
         .collection("JobApplications")
-        .countDocuments({ userId: userID });
+        .countDocuments(query);
 
       console.log(total);
 
+      //GET 10 at a time
+      //Limitation if there alot of data, it will be slow, but for this purpose it should be fine
       const data1 = await db
         .collection("JobApplications")
-        .find({ userId: userID })
+        .find(query)
         .skip(page > 0 ? (page - 1) * 10 : 0)
         .limit(10)
         .toArray();
 
-      // console.log("------------------------------");
-      // console.log(data1);
       res.status(200).json({
         message: "Successfull",
         data: data1,
