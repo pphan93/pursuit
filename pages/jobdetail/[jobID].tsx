@@ -7,13 +7,13 @@ import {
   ChangeEvent,
 } from "react";
 import Form from "../../components/Form/Form";
-import Layout from "../../components/layout/Layout";
 import ArrowsStepper from "../../components/ui/ArrowsStepper";
 import RatingStars from "../../components/ui/Icon/RatingStars";
-import styles from "./[jobID].module.css";
 import useSWR from "swr";
 import { useRouter } from "next/router";
 import Loading from "../../components/ui/Loading";
+import { getSession } from "next-auth/react";
+import { GetServerSideProps } from "next";
 
 export async function fetcher<JSON = any>(
   input: RequestInfo,
@@ -39,15 +39,6 @@ interface ApiData {
   total: number;
 }
 
-// interface Error {
-//   error: string
-// }
-
-// interface API {
-//   data: ApiData,
-//   error: Error
-// }
-
 const JobDetail = () => {
   const router = useRouter();
   const { jobID } = router.query;
@@ -71,10 +62,6 @@ const JobDetail = () => {
 
   if (error) return <div>failed to load</div>;
   if (!data) return <Loading />;
-
-  // useEffect(() => {
-  //   setStatus(data.data.applicationStatus);
-  // }, [data]);
 
   console.log(jobID);
   let rating = 3;
@@ -214,6 +201,24 @@ const JobDetail = () => {
     //   </div>
     // </div>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const session = await getSession({ req: context.req });
+
+  console.log(session);
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/landingpage",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: { session },
+  };
 };
 
 export default JobDetail;

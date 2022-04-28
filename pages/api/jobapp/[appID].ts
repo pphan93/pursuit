@@ -38,7 +38,7 @@ export default async function handler(
       .findOne({ email: token.email }, { projection: { _id: 1 } });
 
     const userID: ObjectId = customer!._id;
-    // console.log("JSON Web Token", token);
+    console.log(userID);
 
     if (req.method === "GET") {
       let finalData = {};
@@ -51,7 +51,7 @@ export default async function handler(
 
       const o_id: ObjectId = new ObjectId(id);
 
-      //   console.log(o_id);
+      console.log(o_id);
 
       const data1 = await db.collection("JobApplications").findOne({
         $and: [
@@ -62,7 +62,7 @@ export default async function handler(
         ],
       });
 
-      // console.log(data1.jobLevel);
+      console.log(data1);
 
       if (
         data1 !== null &&
@@ -88,11 +88,25 @@ export default async function handler(
           },
         ];
 
-        const levelfyi = await db.collection("levels").aggregate(pipeline);
-        // console.log(levelfyi);
-        for await (const doc of levelfyi) {
-          console.log(doc.avgComp);
-          finalData = { ...data1, avgComp: doc.avgComp };
+        const levelfyi = await db
+          .collection("levels")
+          .aggregate(pipeline)
+          .toArray();
+        console.log(levelfyi);
+
+        if (levelfyi.length !== 0) {
+          for await (const doc of levelfyi) {
+            if (Object.keys(doc.avgComp).length === 0) {
+              console.log("test");
+
+              finalData = { ...data1, avgComp: doc.avgComp };
+            } else {
+              console.log("test");
+              finalData = { ...data1 };
+            }
+          }
+        } else {
+          finalData = { ...data1 };
         }
       } else {
         finalData = { ...data1 };

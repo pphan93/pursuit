@@ -320,7 +320,7 @@ const Form: React.FC<Props> = ({ data }) => {
       </div>
       <div className="md:col-span-5 text-right px-4">
         <div className="inline-flex items-end">
-          <button className="bg-cblue hover:bg-prussblue text-white font-bold py-2 px-4 rounded">
+          <button className="bg-prussblue hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
             Submit
           </button>
         </div>

@@ -87,7 +87,7 @@ const TableRow = (props: JobApp) => {
           >
             <div
               tabIndex={0}
-              className="focus:outline-none focus:text-prussblue text-xs w-full hover:bg-cblue py-4 px-4 cursor-pointer hover:text-white"
+              className="focus:outline-none focus:text-prussblue text-xs w-full hover:bg-gray-100 py-4 px-4 cursor-pointer hover:text-prussblue"
             >
               <p>Rejected</p>
             </div>
@@ -96,7 +96,7 @@ const TableRow = (props: JobApp) => {
               onClick={() => {
                 props.favoriteHandler(props._id, props.favorite);
               }}
-              className="focus:outline-none focus:text-prussblue text-xs w-full hover:bg-cblue py-4 px-4 cursor-pointer hover:text-white"
+              className="focus:outline-none focus:text-prussblue text-xs w-full hover:bg-gray-100 py-4 px-4 cursor-pointer hover:text-prussblue"
             >
               <p>Favorite</p>
             </div>
@@ -105,7 +105,7 @@ const TableRow = (props: JobApp) => {
               onClick={() => {
                 props.deleteHandler(props._id);
               }}
-              className="focus:outline-none focus:ttext-prussblue text-xs w-full hover:bg-cblue py-4 px-4 cursor-pointer hover:text-white"
+              className="focus:outline-none focus:ttext-prussblue text-xs w-full hover:bg-gray-100 py-4 px-4 cursor-pointer hover:text-prussblue"
             >
               <p>Delete</p>
             </div>

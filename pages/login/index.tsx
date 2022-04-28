@@ -110,9 +110,10 @@ const Login = () => {
               </label>
               <input
                 title="email input"
-                className="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
+                className="border-0 px-2 py-2 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                 type="email"
                 name="email"
+                placeholder="myname@email.com"
                 onChange={emailInputHandler}
                 value={email}
               />
@@ -131,9 +132,10 @@ const Login = () => {
               </div>
               <input
                 title="password input"
-                className="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
+                className="border-0 px-2 py-2 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                 type="password"
                 name="password"
+                placeholder="********"
                 onChange={passwordInputHandler}
                 value={password}
               />

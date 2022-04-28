@@ -86,7 +86,7 @@ const SignUp = () => {
             <p className="text-xl text-gray-600 text-center">
               Let&apos;s get started!
             </p>
-            <a
+            {/* <a
               href="#"
               className="flex items-center justify-center mt-4 text-white rounded-lg shadow-md hover:bg-gray-100"
             >
@@ -100,7 +100,7 @@ const SignUp = () => {
               <h1 className="px-4 py-3 w-5/6 text-center text-gray-600 font-bold">
                 Sign up with LinkedIn
               </h1>
-            </a>
+            </a> */}
             <div className="mt-4 flex items-center justify-between">
               <span className="border-b w-1/5 lg:w-1/4"></span>
               <a
@@ -120,7 +120,7 @@ const SignUp = () => {
                   First Name
                 </label>
                 <input
-                  className="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                  className="border-0 px-2 py-2 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                   id="firstName"
                   type="text"
                   placeholder="First Name"
@@ -137,7 +137,7 @@ const SignUp = () => {
                   Last Name
                 </label>
                 <input
-                  className="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                  className="border-0 px-2 py-2 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                   id="lastName"
                   type="text"
                   placeholder="Last Name"
@@ -156,7 +156,7 @@ const SignUp = () => {
                   Email
                 </label>
                 <input
-                  className="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                  className="border-0 px-2 py-2 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                   id="email"
                   type="email"
                   placeholder="email@email.com"
@@ -175,7 +175,7 @@ const SignUp = () => {
                   Password
                 </label>
                 <input
-                  className="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                  className="border-0 px-2 py-2 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                   id="password"
                   type="password"
                   placeholder="*********"
@@ -194,7 +194,7 @@ const SignUp = () => {
                   Confirm Password
                 </label>
                 <input
-                  className="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                  className="border-0 px-2 py-2 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                   id="confirmpassword"
                   type="password"
                   placeholder="*********"

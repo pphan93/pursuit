@@ -127,13 +127,25 @@ const Table: React.FC<Props> = ({ query }) => {
       //trigger revalidation if there changes, trigger render
       mutate(`/api/jobapp?page=${currentPage}&option=${query}`);
     }
-    if (statusCode === 201) {
-      router.push(`/jobdetail/${data.insertedId}`);
-    }
   };
 
   const deleteOnHandler = async (id: string) => {
     console.log(id);
+    const res = await fetch("/api/jobapp/delete?appID=" + id, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const data = await res.json();
+    const statusCode = res.status;
+    // console.log(data);
+    console.log(statusCode);
+    if (statusCode === 200) {
+      //trigger revalidation if there changes, trigger render
+      mutate(`/api/jobapp?page=${currentPage}&option=${query}`);
+    }
   };
 
   return (

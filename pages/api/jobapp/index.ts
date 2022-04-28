@@ -24,9 +24,8 @@ export default async function handler(
 ) {
   const token = await getToken({ req, secret });
 
+  //checked if signed in before updating
   if (token) {
-    //signed in
-
     console.log(token);
 
     const client = await connectToDatabase();
@@ -41,13 +40,7 @@ export default async function handler(
 
     //-----------------ADD NEW APPLICATION ---------------------//
     if (req.method === "POST") {
-      // console.log("api Request");
-      // console.log(req.body.userInput);
-
       const inputData = req.body.userInput;
-
-      // console.log(req.body.userInput);
-
       let data = {};
 
       data = {
@@ -62,11 +55,43 @@ export default async function handler(
         jobDescription: inputData.jobDescription,
         estimatedSalary: 0,
         officialSalary: inputData.officialSalary,
+        jobLevel: inputData.jobLevel,
         applicationStatus: [
           {
             name: inputData.applicationStatus,
             status: "Active",
             createdDate: new Date(),
+            lastModified: new Date(),
+          },
+          {
+            name: "Interview 1",
+            status: null,
+            createdDate: new Date(),
+            lastModified: new Date(),
+          },
+          {
+            name: "Take Home",
+            status: null,
+            createdDate: new Date(),
+            lastModified: new Date(),
+          },
+          {
+            name: "Interview 2",
+            status: null,
+            createdDate: new Date(),
+            lastModified: new Date(),
+          },
+          {
+            name: "Offered",
+            status: null,
+            createdDate: new Date(),
+            lastModified: new Date(),
+          },
+          {
+            name: "Accepted",
+            status: null,
+            createdDate: new Date(),
+            lastModified: new Date(),
           },
         ],
         createdDate: new Date(),
@@ -84,16 +109,12 @@ export default async function handler(
 
       //---------------GET ALL APPLICATIONS------------------////////
     } else if (req.method === "GET") {
-      // const client = await connectToDatabase();
-
-      // const db = client.db();
-
-      console.log(req.query);
+      // console.log(req.query);
 
       //PAGINATION
       const page = +req.query.page;
 
-      //OPTIONS
+      //OPTIONS - ALL or fav job application depend on query
       const option = req.query.option;
       let query;
       if (option === "All") {

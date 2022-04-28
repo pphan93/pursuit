@@ -31,12 +31,12 @@ const SplashPage = () => {
 
           <div className="flex w-1/2 justify-end content-center ">
             <Link href="/login">
-              <a className="border border-cblue text-cblue mr-5 px-8 py-2 rounded-full   hover:bg-purple-600 transition duration-300">
+              <a className="border border-prussblue text-prussblue mr-5 px-8 py-2 rounded-full   hover:bg-purple-600 transition duration-300">
                 Login
               </a>
             </Link>
             <Link href="/signup">
-              <a className="bg-cblue text-white px-4 py-2 rounded-full text-1xl  hover:bg-purple-800 transition duration-300">
+              <a className="bg-prussblue text-white px-4 py-2 rounded-full text-1xl  hover:bg-purple-800 transition duration-300">
                 Pursuit Now
               </a>
             </Link>
@@ -64,7 +64,7 @@ const SplashPage = () => {
           </p> */}
 
           <Link href="/signup">
-            <a className="bg-cblue text-white px-4 py-2  rounded-full text-1xl  hover:bg-purple-800 transition duration-300">
+            <a className="bg-prussblue text-white px-4 py-2  rounded-full text-1xl  hover:bg-purple-800 transition duration-300">
               Start Pursuiting
             </a>
           </Link>

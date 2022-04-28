@@ -40,21 +40,16 @@ export default async function handler(
     const userID: ObjectId = customer!._id;
     // console.log("JSON Web Token", token);
 
-    if (req.method === "PUT") {
+    if (req.method === "DELETE") {
       const id: any = req.query.appID;
       console.log(id);
       const o_id: ObjectId = new ObjectId(id);
 
       const body = req.body.favorite;
       console.log(body);
-      const data1 = await db.collection("JobApplications").findOneAndUpdate(
-        { _id: o_id },
-        {
-          $set: { favorite: body },
-          //@ts-ignore
-          $currentDate: { lastModified: true },
-        }
-      );
+      const data1 = await db
+        .collection("JobApplications")
+        .findOneAndDelete({ _id: o_id });
 
       res
         .status(200)
