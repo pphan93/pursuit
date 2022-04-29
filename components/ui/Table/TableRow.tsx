@@ -48,6 +48,7 @@ const TableRow = (props: JobApp) => {
   let appStatus = { name: "", color: "" };
   props.status.find((post: { status: string; name: string }, index: number) => {
     if (
+      post.status === "Rejected" ||
       post.status === "Active" ||
       (post.status === "Completed" && post.name === "Accepted")
     ) {
@@ -96,8 +97,6 @@ const TableRow = (props: JobApp) => {
           className={
             "inline-flex px-2 text-xs font-semibold leading-5 text-white rounded-full " +
             appStatus.color
-            // "bg-status-" +
-            // appStatus.color
           }
         >
           {appStatus.name}
