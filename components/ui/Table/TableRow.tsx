@@ -59,7 +59,6 @@ const TableRow = (props: JobApp) => {
     }
   });
 
-  console.log(appStatus);
   let lastUpdated =
     "Last updated " +
     Math.round((+new Date() - +new Date(props.updatedDate)) / 3600000) +

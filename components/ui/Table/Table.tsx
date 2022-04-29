@@ -145,7 +145,6 @@ const Table: React.FC<Props> = ({ query }) => {
     const data = await res.json();
     const statusCode = res.status;
     // console.log(data);
-    console.log(statusCode);
     if (statusCode === 200) {
       //trigger revalidation if there changes, trigger render
       mutate(`/api/jobapp?page=${currentPage}&option=${query}`);
@@ -163,7 +162,6 @@ const Table: React.FC<Props> = ({ query }) => {
     const data = await res.json();
     const statusCode = res.status;
     // console.log(data);
-    console.log(statusCode);
     if (statusCode === 200) {
       //trigger revalidation if there changes, trigger render
       mutate(`/api/jobapp?page=${currentPage}&option=${query}`);

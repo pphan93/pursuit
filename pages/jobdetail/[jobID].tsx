@@ -141,9 +141,6 @@ const JobDetail = () => {
   };
 
   return (
-    // <div className="w-full xl:w-8/12 mb-12 xl:mb-0 px-4 mx-auto mt-5">
-    //   <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded ">
-    // <div className="rounded-t mb-0 px-4 pt-6 pb-8 border-0">
     <div className=" md:p-8 mb-6">
       <div className="flex flex-wrap items-center">
         <div className="relative w-full  max-w-full flex-grow flex-1">
@@ -196,10 +193,6 @@ const JobDetail = () => {
       </div>
       {data ? <Form data={data.data} /> : null}
     </div>
-    // </div> */
-
-    //   </div>
-    // </div>
   );
 };
 
