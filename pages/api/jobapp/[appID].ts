@@ -8,6 +8,7 @@ const secret = process.env.SECRET;
 
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
+import { compareSync } from "bcryptjs";
 
 type Data = {
   message: string;
@@ -62,7 +63,7 @@ export default async function handler(
         ],
       });
 
-      console.log(data1);
+      // console.log(data1);
 
       if (
         data1 !== null &&
@@ -70,20 +71,39 @@ export default async function handler(
         data1.jobLevel !== "" &&
         data1.jobLevel !== undefined
       ) {
-        console.log("weee");
+        let jobTitle = "";
+        if (
+          data1.jobTitle.toLowerCase().includes("software") === true ||
+          data1.jobTitle.toLowerCase().includes("developer") === true
+        ) {
+          console.log("----");
+          jobTitle = "Software Engineer";
+        }
+
+        console.log(jobTitle);
         const pipeline = [
           {
             $match: {
               company: data1.company.name,
-              title: { $regex: data1.jobTitle, $options: "i" },
-              level: { $regex: data1.jobLevel, $options: "i" },
-              location: { $regex: "Toronto", $options: "i" },
+              title: new RegExp(".*" + jobTitle + ".*"),
+              level: new RegExp(".*" + data1.jobLevel + ".*", "i"),
+              location: new RegExp(
+                ".*" + data1.company.location.split(",")[0] + ".*"
+              ),
             },
           },
           {
             $group: {
-              _id: "$location",
+              _id: null,
               avgComp: { $avg: "$totalyearlycompensation" },
+            },
+          },
+          {
+            $project: {
+              _id: null,
+              avgComp: {
+                $round: ["$avgComp", 0],
+              },
             },
           },
         ];
@@ -92,16 +112,12 @@ export default async function handler(
           .collection("levels")
           .aggregate(pipeline)
           .toArray();
-        console.log(levelfyi);
 
         if (levelfyi.length !== 0) {
           for await (const doc of levelfyi) {
             if (Object.keys(doc.avgComp).length === 0) {
-              console.log("test");
-
               finalData = { ...data1, avgComp: doc.avgComp };
             } else {
-              console.log("test");
               finalData = { ...data1 };
             }
           }
@@ -112,11 +128,6 @@ export default async function handler(
         finalData = { ...data1 };
       }
 
-      // console.log("0--------------------------=");
-      // console.log(levelfyi);
-
-      // console.log("------------------------------");
-      console.log(finalData);
       res.status(200).json({
         message: "Successfull",
         data: finalData,
