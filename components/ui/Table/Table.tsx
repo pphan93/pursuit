@@ -35,10 +35,15 @@ type Job = {
     name: string;
     location: string;
   };
+  applicationStatus: [
+    {
+      name: string;
+      status: string;
+    }
+  ];
   lastModified: Date;
   createdDate: Date;
   favorite: boolean;
-  favoriteHandler: (id: string) => void;
 };
 
 export async function fetcher<JSON = any>(
@@ -130,7 +135,24 @@ const Table: React.FC<Props> = ({ query }) => {
   };
 
   const deleteOnHandler = async (id: string) => {
-    console.log(id);
+    const res = await fetch("/api/jobapp/delete?appID=" + id, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const data = await res.json();
+    const statusCode = res.status;
+    // console.log(data);
+    console.log(statusCode);
+    if (statusCode === 200) {
+      //trigger revalidation if there changes, trigger render
+      mutate(`/api/jobapp?page=${currentPage}&option=${query}`);
+    }
+  };
+
+  const rejectedOnHandler = async (id: string) => {
     const res = await fetch("/api/jobapp/delete?appID=" + id, {
       method: "DELETE",
       headers: {
@@ -149,8 +171,6 @@ const Table: React.FC<Props> = ({ query }) => {
   };
 
   return (
-    //<div className="w-full xl:w-8/12 mb-12 xl:mb-0 px-4 mx-auto mt-5">
-    // <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded ">
     <>
       <div className="rounded-t mb-0 px-4 pt-6 pb-8 border-0">
         <div className="flex flex-wrap items-center">
@@ -237,9 +257,10 @@ const Table: React.FC<Props> = ({ query }) => {
                   updatedDate={job.lastModified}
                   companyName={job.company.name}
                   favorite={job.favorite}
-                  status="OFFER"
+                  status={job.applicationStatus}
                   favoriteHandler={favoriteOnHandler}
                   deleteHandler={deleteOnHandler}
+                  rejectedHandler={rejectedOnHandler}
                   dateSaved={new Date(job.createdDate).toLocaleDateString(
                     "en-us",
                     { year: "numeric", month: "short", day: "numeric" }

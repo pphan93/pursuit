@@ -19,6 +19,15 @@ module.exports = {
       gray: colors.slate,
       green: colors.green,
       blueGray: colors.blueGray,
+      status: {
+        100: "#fec400",
+        200: "#27AE60",
+        300: "#25A259",
+        400: "#229652",
+        500: "#1F894B",
+        600: "#98E8B9",
+        700: "#f12b2c",
+      },
     },
     extend: {
       zIndex: {

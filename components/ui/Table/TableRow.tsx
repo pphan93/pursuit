@@ -10,10 +10,21 @@ type JobApp = {
   updatedDate: Date;
   companyName: string;
   dateSaved: string;
-  status: string;
   favorite: boolean;
+  status: [{ name: string; status: string }];
   favoriteHandler: (id: string, favorite: boolean) => void;
   deleteHandler: (id: string) => void;
+  rejectedHandler: (id: string) => void;
+};
+
+const statusColor = {
+  Applied: "bg-status-100",
+  "Interview 1": "bg-status-200",
+  "Take Home": "bg-status-300",
+  "Interview 2": "bg-status-400",
+  Offered: "bg-status-500",
+  Accepted: "bg-status-600",
+  Rejected: "bg-status-700",
 };
 
 const TableRow = (props: JobApp) => {
@@ -33,6 +44,21 @@ const TableRow = (props: JobApp) => {
     setSettingButton((prevState) => !prevState);
   };
 
+  //get current active status and color corresponding to the status
+  let appStatus = { name: "", color: "" };
+  props.status.find((post: { status: string; name: string }, index: number) => {
+    if (
+      post.status === "Active" ||
+      (post.status === "Completed" && post.name === "Accepted")
+    ) {
+      appStatus = {
+        name: post.name,
+        color: statusColor[post.name as keyof typeof statusColor],
+      };
+    }
+  });
+
+  console.log(appStatus);
   let lastUpdated =
     "Last updated " +
     Math.round((+new Date() - +new Date(props.updatedDate)) / 3600000) +
@@ -66,8 +92,15 @@ const TableRow = (props: JobApp) => {
         {props.dateSaved}
       </td>
       <td className="border-t-0 px-6  align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-        <span className="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
-          {props.status}
+        <span
+          className={
+            "inline-flex px-2 text-xs font-semibold leading-5 text-white rounded-full " +
+            appStatus.color
+            // "bg-status-" +
+            // appStatus.color
+          }
+        >
+          {appStatus.name}
         </span>
       </td>
       <td>
@@ -87,6 +120,9 @@ const TableRow = (props: JobApp) => {
           >
             <div
               tabIndex={0}
+              onClick={() => {
+                props.rejectedHandler(props._id);
+              }}
               className="focus:outline-none focus:text-prussblue text-xs w-full hover:bg-gray-100 py-4 px-4 cursor-pointer hover:text-prussblue"
             >
               <p>Rejected</p>
