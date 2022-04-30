@@ -86,19 +86,23 @@ const JobDetail = () => {
     const current = existingItems.findIndex(
       (item: { name: string; status: string | null }) => item.name === value
     );
+
+    console.log(current);
     const updatedItem = existingItems.map(
       (item: { name: string; status: string | null }, index) => {
         return item.name === value && item.name !== "Accepted"
-          ? { ...item, status: "Active" }
+          ? { ...item, status: "Active", lastModified: new Date() }
           : current < index
           ? { ...item, status: null }
           : item.name === "Accepted"
-          ? { ...item, status: "Completed" }
-          : { ...item, status: "Completed" };
+          ? { ...item, status: "Completed", lastModified: new Date() }
+          : item.status === "Completed"
+          ? { ...item }
+          : { ...item, status: "Completed", lastModified: new Date() };
       }
     );
 
-    setStatus(updatedItem);
+    // setStatus(updatedItem);
 
     const updateStatusAPI = async () => {
       const res = await fetch(`/api/jobapp/${jobID}`, {
@@ -114,8 +118,11 @@ const JobDetail = () => {
       console.log(res);
 
       const updateRes = await res.json();
-      const statusCode = res.status;
-      console.log(updateRes);
+
+      const statusCode = await res.status;
+      if (statusCode === 200) {
+        setStatus(updateRes.data);
+      }
     };
 
     updateStatusAPI();
@@ -155,7 +162,7 @@ const JobDetail = () => {
         <div className="flex items-center">
           <img
             className="h-8 w-8 rounded-full mr-3"
-            src={`https://logo.clearbit.com/${data.data.company.name}.com`}
+            src={`https://logo.clearbit.com/${data.data.company.name.toLowerCase()}.com`}
           ></img>
 
           {/* Show the star for the company rating */}

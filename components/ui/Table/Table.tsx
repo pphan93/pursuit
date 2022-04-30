@@ -251,7 +251,7 @@ const Table: React.FC<Props> = ({ query }) => {
                   key={job._id}
                   _id={job._id}
                   jobTitle={job.jobTitle}
-                  logo={`https://logo.clearbit.com/${job.company.name}.com`}
+                  logo={`https://logo.clearbit.com/${job.company.name.toLowerCase()}.com`}
                   updatedDate={job.lastModified}
                   companyName={job.company.name}
                   favorite={job.favorite}

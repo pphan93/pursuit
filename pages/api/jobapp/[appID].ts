@@ -140,18 +140,50 @@ export default async function handler(
       const o_id: ObjectId = new ObjectId(id);
 
       const body = req.body.updatedItem;
+
+      console.log(body);
       const data1 = await db.collection("JobApplications").findOneAndUpdate(
         { _id: o_id },
         {
           $set: { applicationStatus: body },
           //@ts-ignore
           $currentDate: { lastModified: true },
-        }
+        },
+        //by default it return unaltered value, add this to return the altered data
+        { returnDocument: "after" }
       );
 
-      res
-        .status(200)
-        .json({ message: "Updated successful", data: data1, total: null });
+      // console.log(body);
+      // const data1 = await db
+      //   .collection("JobApplications")
+      //   .findOneAndUpdate({ _id: o_id }, [
+      //     {
+      //       $set: {
+      //         applicationStatus: {
+      //           $map: {
+      //             input: { $range: [0, { $size: "$applicationStatus" }] },
+      //             in: {
+      //               $mergeObjects: [
+      //                 { $arrayElemAt: ["$applicationStatus", "$$this"] },
+      //                 { name: { $arrayElemAt: [body, "$$this"] } },
+      //               ],
+      //             },
+      //           },
+      //         },
+      //       },
+      //     },
+      //   ]);
+
+      // console.log(data1);
+
+      //@ts-ignore
+      const appStatusReturn = data1.value.applicationStatus;
+
+      res.status(200).json({
+        message: "Updated successful",
+        data: appStatusReturn,
+        total: null,
+      });
     }
   } else {
     res.status(401).json({ message: "Unauthorized", data: null, total: null });
