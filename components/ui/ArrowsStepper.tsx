@@ -16,6 +16,8 @@ const ArrowsStepper = (props: status) => {
           ? (style = `${styles.step} ${styles.done}`)
           : item.status === "Active"
           ? (style = `${styles.step} ${styles.current}`)
+          : item.status === "Rejected"
+          ? (style = `${styles.step} ${styles.reject}`)
           : (style = `${styles.step}`);
 
         return (

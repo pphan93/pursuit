@@ -52,10 +52,17 @@ const TableRow = (props: JobApp) => {
       post.status === "Active" ||
       (post.status === "Completed" && post.name === "Accepted")
     ) {
-      appStatus = {
-        name: post.name,
-        color: statusColor[post.name as keyof typeof statusColor],
-      };
+      if (post.status === "Rejected") {
+        appStatus = {
+          name: post.status,
+          color: statusColor[post.status as keyof typeof statusColor],
+        };
+      } else {
+        appStatus = {
+          name: post.name,
+          color: statusColor[post.name as keyof typeof statusColor],
+        };
+      }
     }
   });
 

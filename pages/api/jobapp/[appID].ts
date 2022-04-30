@@ -153,29 +153,6 @@ export default async function handler(
         { returnDocument: "after" }
       );
 
-      // console.log(body);
-      // const data1 = await db
-      //   .collection("JobApplications")
-      //   .findOneAndUpdate({ _id: o_id }, [
-      //     {
-      //       $set: {
-      //         applicationStatus: {
-      //           $map: {
-      //             input: { $range: [0, { $size: "$applicationStatus" }] },
-      //             in: {
-      //               $mergeObjects: [
-      //                 { $arrayElemAt: ["$applicationStatus", "$$this"] },
-      //                 { name: { $arrayElemAt: [body, "$$this"] } },
-      //               ],
-      //             },
-      //           },
-      //         },
-      //       },
-      //     },
-      //   ]);
-
-      // console.log(data1);
-
       //@ts-ignore
       const appStatusReturn = data1.value.applicationStatus;
 

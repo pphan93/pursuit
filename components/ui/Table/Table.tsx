@@ -152,8 +152,8 @@ const Table: React.FC<Props> = ({ query }) => {
   };
 
   const rejectedOnHandler = async (id: string) => {
-    const res = await fetch("/api/jobapp/delete?appID=" + id, {
-      method: "DELETE",
+    const res = await fetch("/api/jobapp/reject?appID=" + id, {
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },

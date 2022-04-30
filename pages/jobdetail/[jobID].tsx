@@ -43,7 +43,7 @@ const JobDetail = () => {
   const router = useRouter();
   const { jobID } = router.query;
   const [status, setStatus] = useState<
-    { status: string | null; name: string }[]
+    { status: string | null; name: string } | undefined[]
   >([]);
 
   const { data, error }: any = useSWR(
@@ -63,7 +63,9 @@ const JobDetail = () => {
   if (error) return <div>failed to load</div>;
   if (!data) return <Loading />;
 
-  console.log(jobID);
+  // console.log(statusSelect);
+
+  // console.log(jobID);
   let rating = 3;
   let styleName = [];
 
@@ -76,7 +78,7 @@ const JobDetail = () => {
     }
   }
 
-  console.log(data);
+  // console.log(data);
 
   const onClickHandler = (value: string | null): void => {
     //progress in the steppers
@@ -87,7 +89,7 @@ const JobDetail = () => {
       (item: { name: string; status: string | null }) => item.name === value
     );
 
-    console.log(current);
+    // console.log(current);
     const updatedItem = existingItems.map(
       (item: { name: string; status: string | null }, index) => {
         return item.name === value && item.name !== "Accepted"
@@ -115,37 +117,22 @@ const JobDetail = () => {
         }),
       });
 
-      console.log(res);
+      // console.log(res);
 
       const updateRes = await res.json();
 
-      const statusCode = await res.status;
+      const statusCode = res.status;
       if (statusCode === 200) {
         setStatus(updateRes.data);
       }
     };
 
     updateStatusAPI();
-
-    // if (statusCode === 201) {
-    //   router.push(`/jobdetail/${data.insertedId}`);
-    // }
-
-    // setStatus((existingItems) => {
-    //   const current = existingItems.findIndex(
-    //     (item) => item.name === e.target.textContent
-    //   );
-    //   return existingItems.map((item, index) => {
-    //     return item.name === e.target.textContent && item.name !== "Accepted"
-    //       ? { ...item, status: "Active" }
-    //       : current < index
-    //       ? { ...item, status: null }
-    //       : item.name === "Accepted"
-    //       ? { ...item, status: "Completed" }
-    //       : { ...item, status: "Completed" };
-    //   });
-    // });
   };
+
+  // const statusSelect = status.find((item) => item.status === "Active");
+  // console.log("-------------------");
+  // console.log(statusSelect.name);
 
   return (
     <div className=" md:p-8 mb-6">
@@ -184,8 +171,25 @@ const JobDetail = () => {
               className="visible md:hidden border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
               id="grid-state"
               name="applicationStatus"
-              // value={userInput.applicationStatus}
-              // onChange={onChangeSelectHandler}
+              value={
+                status.find(
+                  (item: { name: string; status: string }) =>
+                    item.status === "Active"
+                ) !== undefined
+                  ? status.find(
+                      (item: { name: string; status: string }) =>
+                        item.status === "Active"
+                    ).name
+                  : status.find(
+                      (item: { name: string; status: string }) =>
+                        item.status === "Rejected"
+                    ) !== undefined
+                  ? "Rejected"
+                  : ""
+              }
+              onChange={(e: React.ChangeEvent<HTMLSelectElement>): void =>
+                onClickHandler(e.target.value)
+              }
             >
               <option>Applied</option>
               <option>Interview 1</option>
@@ -193,6 +197,7 @@ const JobDetail = () => {
               <option>Interview 2</option>
               <option>Offered</option>
               <option>Accepted</option>
+              <option>Rejected</option>
             </select>
           </div>
         </div>

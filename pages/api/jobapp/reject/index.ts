@@ -40,16 +40,25 @@ export default async function handler(
     const userID: ObjectId = customer!._id;
     // console.log("JSON Web Token", token);
 
-    if (req.method === "PATCH") {
+    if (req.method === "PUT") {
       const id: any = req.query.appID;
       console.log(id);
       const o_id: ObjectId = new ObjectId(id);
 
-      //   const body = req.body.favorite;
-      //   console.log(body);
-      const data1 = await db
-        .collection("JobApplications")
-        .findOneAndDelete({ _id: o_id });
+      const body = req.body.favorite;
+      console.log(body);
+      const data1 = await db.collection("JobApplications").findOneAndUpdate(
+        { _id: o_id, "applicationStatus.status": "Active" },
+
+        {
+          $set: { "applicationStatus.$.status": "Rejected" },
+          //@ts-ignore
+          $currentDate: { lastModified: true },
+        },
+        { returnDocument: "after" }
+      );
+
+      console.log(data1);
 
       res
         .status(200)

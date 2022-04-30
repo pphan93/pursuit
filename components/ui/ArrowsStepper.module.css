@@ -107,3 +107,17 @@
 .arrow-steps .step.done:after {
   border-left: 17px solid #1d3557;
 }
+
+.arrow-steps .step.reject {
+  color: #f1faee;
+  background-color: #e63946;
+}
+
+.arrow-steps .step.reject a {
+  color: #f1faee;
+  text-decoration: none;
+}
+
+.arrow-steps .step.reject:after {
+  border-left: 17px solid #e63946;
+}
