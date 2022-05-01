@@ -43,7 +43,7 @@ const JobDetail = () => {
   const router = useRouter();
   const { jobID } = router.query;
   const [status, setStatus] = useState<
-    { status: string | null; name: string } | undefined[]
+    { status: string | null; name: string }[]
   >([]);
 
   const { data, error }: any = useSWR(
@@ -130,9 +130,19 @@ const JobDetail = () => {
     updateStatusAPI();
   };
 
-  // const statusSelect = status.find((item) => item.status === "Active");
-  // console.log("-------------------");
-  // console.log(statusSelect.name);
+  //Show the active status for mobile version (use selector instead of arrow steppers), if reject show rejected
+  //refactor to fix typescript
+  let statusSelect = "";
+
+  if (status !== undefined) {
+    const active = status.find((item) => item.status === "Active");
+    const rejected = status.find((item) => item.status === "Rejected");
+    if (active !== undefined) {
+      statusSelect = active.name;
+    } else if (rejected !== undefined) {
+      statusSelect = "Rejected";
+    }
+  }
 
   return (
     <div className=" md:p-8 mb-6">
@@ -171,22 +181,7 @@ const JobDetail = () => {
               className="visible md:hidden border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
               id="grid-state"
               name="applicationStatus"
-              value={
-                status.find(
-                  (item: { name: string; status: string }) =>
-                    item.status === "Active"
-                ) !== undefined
-                  ? status.find(
-                      (item: { name: string; status: string }) =>
-                        item.status === "Active"
-                    ).name
-                  : status.find(
-                      (item: { name: string; status: string }) =>
-                        item.status === "Rejected"
-                    ) !== undefined
-                  ? "Rejected"
-                  : ""
-              }
+              value={statusSelect}
               onChange={(e: React.ChangeEvent<HTMLSelectElement>): void =>
                 onClickHandler(e.target.value)
               }

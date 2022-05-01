@@ -6,7 +6,7 @@ const SplashPage = () => {
   return (
     <div
       className="h-screen pb-14 bg-right bg-cover"
-      style={{ backgroundImage: "url('')" }}
+      // style={{ backgroundImage: "url('')" }}
     >
       <div className="w-full container mx-auto p-6">
         <div className="w-full flex items-center justify-between">
