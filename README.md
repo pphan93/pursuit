@@ -68,7 +68,7 @@ Pursuit is an all-in-one job application tracking. Stop using excel sheets or no
 
 ### Design Phase
 
-I used Figma to create my mockup design. I wanted something that is clean and modern. Please see below.
+I used Figma to create my mockup design. I wanted something that is clean and modern. The final product have few minor changes compare to the mockup. This is due to technical issues or it doesn't look as good.
 
 #### Landing Page
 
@@ -82,13 +82,30 @@ I used Figma to create my mockup design. I wanted something that is clean and mo
 
 ![](readme/Pursuit_Job_Detail_Page.jpg)
 
-### Built With
+### Architecture Diagram
 
-- [Next.js](https://nextjs.org/)
+![](readme/Pursuit_Diagram.png)
+
+#### Vercel
+
+I used Next.js - reactjs framework to build the frontend and backend. Since Next.js is part of Vercel, it make sense to deploy the code Vercel to host it. The deployment was very simple and straight forward to use. After creating an account, I started off by linking the github to Vercel then start deploying my project. The project will auto deploy if there any new git version to main branch (for production).
+
+### Tech Stack
+
+- [Next.js](https://nextjs.org/) was used to build the UI, as well as the server-side logic (API) required for fetching and updating content from mongoDB. The reason for using this ReactJS frameworks:
+  - API Routes
+  - Built in react router
+  - Hybrid statis & server rendering
+  - Zero config
+- [Vercel](https://vercel.com/) was used as a hosting platform for the application and it serverless functions. This is simple to use and it is free with many features.
 - [React.js](https://reactjs.org/)
-- [TailwindCSS](https://tailwindcss.com/)
-- [NextAuth.js](https://next-auth.js.org/)
-- [MongoDB](https://www.mongodb.com/)
+- [TailwindCSS](https://tailwindcss.com/) was used to build modern websites without having to touch css as much. This help speed up the building process and a learning process. This is my first time using TailwindCSS.
+- [NextAuth.js](https://next-auth.js.org/) for authentication for Next.js
+- [MongoDB](https://www.mongodb.com/) was used as a NoSQL database. It is currently being hosted on mongoDB Atlas.
+- [AWS Lambda](https://aws.amazon.com/lambda/) for hosting the code to pull data from levels.fyi, parse the data, store the data into database, and then send email notification using Sendgrid.
+- [AWS EventBridge](https://aws.amazon.com/eventbridge/) for triggering the lambda function every sunday.
+- [SendGrid](https://sendgrid.com/) was used to send email notification when lambda function is finished running. It will if it fail to fetch data, parse the data, or writing to database.
+- [CloudFlare](https://www.cloudflare.com/) uses as proxy between the users and server. This come with many benefits (free tier) such as CDN, DNS, DDOS, Ruleset.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
