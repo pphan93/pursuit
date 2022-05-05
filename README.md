@@ -23,7 +23,7 @@ At Pursuit we made it an one stop shop for your jobs hunting. We offered many fe
     <a href="https://github.com/pphan93/pursuit"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://pursuit.pphan.ca">View Demo</a>
+    <a href="#demo">View Demo</a>
     ·
     <a href="https://github.com/pphan93/pursuit/issues">Report Bug</a>
     ·
@@ -38,12 +38,15 @@ At Pursuit we made it an one stop shop for your jobs hunting. We offered many fe
     <li>
       <a href="#about-the-project">About The Project</a>
       <ul>
-        <li><a href="#built-with">Built With</a></li>
+        <li><a href="#design-phase">Design Phase</a></li>
+        <li><a href="#architecture-diagram">Architecture Diagram</a></li>
+        <li><a href="#tech-stack">Tech Stack</a></li>
       </ul>
     </li>
     <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
+        <li><a href="#demo">Demo</a></li>
         <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
       </ul>
@@ -88,7 +91,17 @@ I used Figma to create my mockup design. I wanted something that is clean and mo
 
 #### Vercel
 
-I used Next.js - reactjs framework to build the frontend and backend. Since Next.js is part of Vercel, it make sense to deploy the code Vercel to host it. The deployment was very simple and straight forward to use. After creating an account, I started off by linking the github to Vercel then start deploying my project. The project will auto deploy if there any new git version to main branch (for production).
+I used Next.js - reactjs framework to build the frontend and backend. Since Next.js is part of Vercel, it make sense to deploy the code to Vercel to host it. The deployment was very simple and straight forward to use. After creating an account, I started off by linking the github to Vercel then start deploying my project. The project will auto deploy if there any new git version to main branch (for production).
+
+#### mongoDB Atlas
+
+I decided to use mongodb as my database. The decision to make was based on that I wanted to learn more about it as I mostly used MS SQL in my professional jobs. The database is being host on mongoDB Atlas, which is free with some limitation. Throughout this project, I chose a hosting providers that are free to use and have some great benefit such as SSL and custom domain.
+
+#### AWS
+
+For salary estimation, I am using data from levels.fyi. Currently they dont have an API that is for the public. However, they do provide salary data in a json format for the data to be useable I have to tranform the data first. After the tranformation, the data get store into my mongodb database for the web application to use. You can find the script that I wrote in this repository called [levelsParseData](https://github.com/pphan93/levelsParseData). I has decided to use AWS Lambda to run my code. The product is free to use and it does the job well. It also have Event Bridge with is a serverless event bus that will trigger the code on different conditions. For this usecase, I want it to trigger on a schedule (every sunday). Lastly, after each run, I will recieve an status email to notify me if the job have been run successfully using SendGrid as email delivery.
+
+![](readme/Pursuit_FetchData_Email.png)
 
 ### Tech Stack
 
@@ -179,10 +192,9 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 
 ## Roadmap
 
-- [ ] Feature 1
-- [ ] Feature 2
-- [ ] Feature 3
-  - [ ] Nested Feature
+- [ ] Metrics - Show cards (total, rejected, etc) and graphs on job applications.
+- [ ] Tasks/Note - Allow users create tasks or notes
+- [ ] Work with other site such as Glassdoor, Linkined, and other to gather information (company rating, salary estimations, company infomation). Currently trying to get Glassdoor api access.
 
 See the [open issues](https://github.com/pphan93/pursuit/issues) for a full list of proposed features (and known issues).
 
@@ -217,7 +229,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 ## Contact
 
-Phuoc Phan - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com
+Phuoc Phan
 
 Project Link: [https://github.com/pphan93/pursuit](https://github.com/pphan93/pursuit)
 
@@ -225,11 +237,11 @@ Project Link: [https://github.com/pphan93/pursuit](https://github.com/pphan93/pu
 
 <!-- ACKNOWLEDGMENTS -->
 
-## Acknowledgments
+<!-- ## Acknowledgments
 
 - []()
 - []()
-- []()
+- []() -->
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
