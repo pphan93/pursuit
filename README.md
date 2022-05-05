@@ -23,7 +23,7 @@ At Pursuit we made it an one stop shop for your jobs hunting. We offered many fe
     <a href="https://github.com/pphan93/pursuit"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/pphan93/pursuit">View Demo</a>
+    <a href="https://pursuit.pphan.ca">View Demo</a>
     ·
     <a href="https://github.com/pphan93/pursuit/issues">Report Bug</a>
     ·
@@ -61,11 +61,26 @@ At Pursuit we made it an one stop shop for your jobs hunting. We offered many fe
 
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
-
-Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `github_username`, `repo_name`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `project_title`, `project_description`
+[![Product Name Screen Shot][product-screenshot]](https://pursuit.pphan.ca)
+Pursuit is an all-in-one job application tracking. Stop using excel sheets or note-taking applications to track your progress. Start using Pursuit to help you with your job search, it is super easy to use so you can stay organized, track every application, and land your dream job.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
+
+### Design Phase
+
+I used Figma to create my mockup design. I wanted something that is clean and modern. Please see below.
+
+#### Landing Page
+
+![](readme/Pursuit_Landing_Page.png)
+
+#### Home Page
+
+![](readme/Pursuit_Home_Page.png)
+
+#### Job Detail Page
+
+![](readme/Pursuit_Job_Detail_Page.jpg)
 
 ### Built With
 
@@ -82,6 +97,16 @@ Here's a blank template to get started: To avoid retyping too much info. Do a se
 ## Getting Started
 
 To get a local copy up and running follow these simple example steps.
+
+### Demo
+
+**See below for a quick demo. You can also try it out using this login.**
+<a href="https://pursuit.pphan.ca">View Demo</a>
+
+```
+Username: johnd@email.com
+Password: asdf1234
+```
 
 ### Prerequisites
 
@@ -194,16 +219,17 @@ Project Link: [https://github.com/pphan93/pursuit](https://github.com/pphan93/pu
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
-[contributors-shield]: https://img.shields.io/github/contributors/github_username/repo_name.svg?style=for-the-badge
+[contributors-shield]: https://img.shields.io/github/contributors/pphan93/pursuit.svg?style=for-the-badge
 [contributors-url]: https://github.com/pphan93/pursuit/contributors
-[forks-shield]: https://img.shields.io/github/forks/github_username/repo_name.svg?style=for-the-badge
+[forks-shield]: https://img.shields.io/github/forks/pphan93/pursuit.svg?style=for-the-badge
 [forks-url]: https://github.com/pphan93/pursuit/network/members
-[stars-shield]: https://img.shields.io/github/stars/github_username/repo_name.svg?style=for-the-badge
+[stars-shield]: https://img.shields.io/github/stars/pphan93/pursuit.svg?style=for-the-badge
 [stars-url]: https://github.com/pphan93/pursuit/stargazers
-[issues-shield]: https://img.shields.io/github/issues/github_username/repo_name.svg?style=for-the-badge
+[issues-shield]: https://img.shields.io/github/issues/pphan93/pursuit.svg?style=for-the-badge
 [issues-url]: https://github.com/pphan93/pursuit/issues
-[license-shield]: https://img.shields.io/github/license/github_username/repo_name.svg?style=for-the-badge
-[license-url]: https://github.com/github_username/repo_name/blob/master/LICENSE.txt
+[license-shield]: https://img.shields.io/github/license/pphan93/pursuit.svg?style=for-the-badge
+[license-url]: https://github.com/pphan93/pursuit/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/phuoc-phan/
 [product-screenshot]: public/Pursuit_pic.png
+[product-diagram]: readme/Pursuit_Diagram.png
