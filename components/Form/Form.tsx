@@ -19,6 +19,7 @@ type IInfo = {
 
 type Props = {
   data: {
+    _id: string;
     company: {
       name: string;
       location: string;
@@ -34,23 +35,22 @@ type Props = {
     jobLevel: string;
     avgComp: number;
   } | null;
+  edit: boolean;
+  updateHandler: ({}) => void;
 };
 
-const Form: React.FC<Props> = ({ data }) => {
+const Form: React.FC<Props> = ({ data, edit, updateHandler }) => {
   const [userInput, setUserInput] = useState<IInfo>({
     company: "",
     jobTitle: "",
     jobUrl: "",
     companyLocation: "",
-    applicationStatus: "Applied",
     deadline: "",
     jobDescription: "",
     estimatedSalary: 0,
     officialSalary: 0,
     jobLevel: "",
   } as IInfo);
-
-  const router = useRouter();
 
   useEffect(() => {
     if (data) {
@@ -75,12 +75,6 @@ const Form: React.FC<Props> = ({ data }) => {
     setUserInput((prevItem) => ({ ...prevItem, [name]: value }));
   };
 
-  const onChangeSelectHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const { value, name } = e.target;
-
-    setUserInput((prevItem) => ({ ...prevItem, [name]: value }));
-  };
-
   const onChangeTextAreaHandler = (
     e: React.ChangeEvent<HTMLTextAreaElement>
   ) => {
@@ -91,24 +85,9 @@ const Form: React.FC<Props> = ({ data }) => {
 
   const onSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    //send user info to backend to add user to database
-    const res = await fetch("/api/jobapp", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        userInput,
-      }),
-    });
 
-    const data = await res.json();
-    const statusCode = res.status;
-    // console.log(data);
-
-    if (statusCode === 201) {
-      router.push(`/jobdetail/${data.insertedId}`);
-    }
+    //send the data back to parent that call this child
+    updateHandler(userInput);
   };
   return (
     <form onSubmit={onSubmitHandler}>
@@ -131,6 +110,7 @@ const Form: React.FC<Props> = ({ data }) => {
               placeholder="Google"
               value={userInput.company}
               onChange={onChangeHandler}
+              readOnly={edit ? false : true}
             />
           </div>
         </div>
@@ -149,6 +129,7 @@ const Form: React.FC<Props> = ({ data }) => {
               placeholder="Software Engineer"
               value={userInput.jobTitle}
               onChange={onChangeHandler}
+              readOnly={edit ? false : true}
             />
           </div>
         </div>
@@ -167,6 +148,7 @@ const Form: React.FC<Props> = ({ data }) => {
               placeholder="L3"
               value={userInput.jobLevel}
               onChange={onChangeHandler}
+              readOnly={edit ? false : true}
             />
           </div>
         </div>
@@ -185,6 +167,7 @@ const Form: React.FC<Props> = ({ data }) => {
               placeholder="https://url.com/jobs/google/softwareengineer"
               value={userInput.jobUrl}
               onChange={onChangeHandler}
+              readOnly={edit ? false : true}
             />
           </div>
         </div>
@@ -203,6 +186,7 @@ const Form: React.FC<Props> = ({ data }) => {
               placeholder="Toronto, CA"
               value={userInput.companyLocation}
               onChange={onChangeHandler}
+              readOnly={edit ? false : true}
             />
           </div>
         </div>
@@ -214,25 +198,6 @@ const Form: React.FC<Props> = ({ data }) => {
         More Information
       </h6>
       <div className="flex flex-wrap">
-        {/* <div className="w-full lg:w-12/12 px-4">
-          <div className="relative w-full mb-3">
-            <select
-              title="status"
-              className="visible md:hidden block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              id="grid-state"
-              name="applicationStatus"
-              value={userInput.applicationStatus}
-              onChange={onChangeSelectHandler}
-            >
-              <option>Applied</option>
-              <option>Interview 1</option>
-              <option>Take Home</option>
-              <option>Interview 2</option>
-              <option>Offered</option>
-              <option>Accepted</option>
-            </select>
-          </div>
-        </div> */}
         <div className="w-full lg:w-4/12 px-4">
           <div className="relative w-full mb-3">
             <label
@@ -249,6 +214,7 @@ const Form: React.FC<Props> = ({ data }) => {
               placeholder="02/02/2022"
               value={userInput.deadline}
               onChange={onChangeHandler}
+              readOnly={edit ? false : true}
             />
           </div>
         </div>
@@ -267,6 +233,7 @@ const Form: React.FC<Props> = ({ data }) => {
               placeholder="150000"
               value={userInput.estimatedSalary}
               onChange={onChangeHandler}
+              readOnly={edit ? false : true}
             />
           </div>
         </div>
@@ -285,6 +252,7 @@ const Form: React.FC<Props> = ({ data }) => {
               placeholder="180000"
               value={userInput.officialSalary}
               onChange={onChangeHandler}
+              readOnly={edit ? false : true}
             />
             {/* <p className="mt-2 text-sm text-red-600 dark:text-red-500">
               <span className="font-medium">Oops!</span> Username already taken!
@@ -314,17 +282,20 @@ const Form: React.FC<Props> = ({ data }) => {
               rows={20}
               value={userInput.jobDescription}
               onChange={onChangeTextAreaHandler}
+              readOnly={edit ? false : true}
             ></textarea>
           </div>
         </div>
       </div>
-      <div className="md:col-span-5 text-right px-4">
-        <div className="inline-flex items-end">
-          <button className="bg-prussblue hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
-            Submit
-          </button>
+      {edit ? (
+        <div className="md:col-span-5 text-right px-4">
+          <div className="inline-flex items-end">
+            <button className="bg-prussblue hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+              Submit
+            </button>
+          </div>
         </div>
-      </div>
+      ) : null}
     </form>
   );
 };

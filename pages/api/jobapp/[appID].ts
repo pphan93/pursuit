@@ -29,8 +29,6 @@ export default async function handler(
   if (token) {
     //signed in
 
-    console.log(token);
-
     const client = await connectToDatabase();
 
     const db = client.db();
@@ -39,20 +37,13 @@ export default async function handler(
       .findOne({ email: token.email }, { projection: { _id: 1 } });
 
     const userID: ObjectId = customer!._id;
-    console.log(userID);
 
     if (req.method === "GET") {
       let finalData = {};
-      // const client = await connectToDatabase();
 
-      // const db = client.db();
-
-      //   console.log(req.query.appID);
       const id: any = req.query.appID;
 
       const o_id: ObjectId = new ObjectId(id);
-
-      console.log(o_id);
 
       const data1 = await db.collection("JobApplications").findOne({
         $and: [
@@ -63,8 +54,7 @@ export default async function handler(
         ],
       });
 
-      // console.log(data1);
-
+      //get the estimated salary from level.fyi db, currently just finding software/developer only due to different name in job title. Will have find better way to determine the role
       if (
         data1 !== null &&
         data1.jobLevel !== null &&
@@ -80,7 +70,7 @@ export default async function handler(
           jobTitle = "Software Engineer";
         }
 
-        console.log(jobTitle);
+        //pipeline to search in database and find a average of all the salary
         const pipeline = [
           {
             $match: {
@@ -135,32 +125,61 @@ export default async function handler(
       });
       client.close();
     } else if (req.method === "PUT") {
+      console.log(req.query);
       const id: any = req.query.appID;
 
       const o_id: ObjectId = new ObjectId(id);
 
-      const body = req.body.updatedItem;
+      // const body = req.body.updatedItem;
 
-      console.log(body);
-      const data1 = await db.collection("JobApplications").findOneAndUpdate(
-        { _id: o_id },
-        {
-          $set: { applicationStatus: body },
-          //@ts-ignore
-          $currentDate: { lastModified: true },
-        },
-        //by default it return unaltered value, add this to return the altered data
-        { returnDocument: "after" }
-      );
+      if (req.query.update === "all") {
+        const data1 = await db.collection("JobApplications").findOneAndUpdate(
+          { _id: o_id },
+          {
+            $set: {
+              "company.name": req.body.formData.company,
+              "company.location": req.body.formData.companyLocation,
+              jobTitle: req.body.formData.jobTitle,
+              jobUrl: req.body.formData.jobUrl,
+              deadline: req.body.formData.deadline,
+              jobDescription: req.body.formData.jobDescription,
+              officialSalary: req.body.formData.officialSalary,
+              jobLevel: req.body.formData.jobLevel,
+            },
+            //@ts-ignore
+            $currentDate: { lastModified: true },
+          },
+          //by default it return unaltered value, add this to return the altered data
+          { returnDocument: "after" }
+        );
+        //@ts-ignore
+        const appStatusReturn = data1.value.applicationStatus;
+        res.status(200).json({
+          message: "Updated successful",
+          data: appStatusReturn,
+          total: null,
+        });
+      } else if (req.query.update === "status") {
+        const data1 = await db.collection("JobApplications").findOneAndUpdate(
+          { _id: o_id },
+          {
+            $set: { applicationStatus: req.body.updatedItem },
+            //@ts-ignore
+            $currentDate: { lastModified: true },
+          },
+          //by default it return unaltered value, add this to return the altered data
+          { returnDocument: "after" }
+        );
+        //@ts-ignore
+        const appStatusReturn = data1.value.applicationStatus;
+        res.status(200).json({
+          message: "Updated successful",
+          data: appStatusReturn,
+          total: null,
+        });
+      }
 
-      //@ts-ignore
-      const appStatusReturn = data1.value.applicationStatus;
-
-      res.status(200).json({
-        message: "Updated successful",
-        data: appStatusReturn,
-        total: null,
-      });
+      client.close();
     }
   } else {
     res.status(401).json({ message: "Unauthorized", data: null, total: null });

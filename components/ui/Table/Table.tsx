@@ -70,43 +70,39 @@ const Table: React.FC<Props> = ({ query }) => {
   if (error) return <div>failed to load</div>;
   if (!data) return <Loading />;
 
-  console.log(message);
-
-  // console.log("Table ");
-  // console.log(jobApps[0]._id);
-  // let pageLimit = 10;
-
   let pagesNumber: number;
 
   if (message.total < 1) {
     pagesNumber = 1;
   } else {
+    //return how many page from api, total/10
     pagesNumber = message.total;
   }
 
-  //Change pages forward and backward
+  //Change pages forward and backward, when user click on the arrow to go next page
   function nextPage() {
     if (currentPage !== pagesNumber) {
       setCurrentPage(currentPage + 1);
     }
   }
-
+  //Change pages forward and backward, when user click on back arrow to back a page
   function lastPage() {
     if (currentPage !== 1) {
       setCurrentPage(currentPage - 1);
     }
   }
 
+  //when user click on the number to go
   const changePage = (e: MouseEvent<HTMLParagraphElement>): void => {
     //Have declare type HTML or else typescript scream
     const text = (e.target as HTMLElement).textContent as string;
 
-    //conver to number
+    //convert to number
     const clickedOnPageNumber: number = +text;
     setCurrentPage(clickedOnPageNumber);
   };
 
-  // // get array of numbers for page number
+  // // get array of numbers for page number, if page number is 2 then it will return [1,2]
   const getPaginationGroup = () => {
     // let start = Math.floor((currentPage - 1) / pageLimit) * pageLimit;
     let start = 0;
@@ -126,14 +122,13 @@ const Table: React.FC<Props> = ({ query }) => {
     });
     const data = await res.json();
     const statusCode = res.status;
-    // console.log(data);
-    console.log(statusCode);
     if (statusCode === 200) {
       //trigger revalidation if there changes, trigger render
       mutate(`/api/jobapp?page=${currentPage}&option=${query}`);
     }
   };
 
+  //delete job application
   const deleteOnHandler = async (id: string) => {
     const res = await fetch("/api/jobapp/delete?appID=" + id, {
       method: "DELETE",
@@ -144,13 +139,13 @@ const Table: React.FC<Props> = ({ query }) => {
 
     const data = await res.json();
     const statusCode = res.status;
-    // console.log(data);
     if (statusCode === 200) {
       //trigger revalidation if there changes, trigger render
       mutate(`/api/jobapp?page=${currentPage}&option=${query}`);
     }
   };
 
+  //reject (status) job application
   const rejectedOnHandler = async (id: string) => {
     const res = await fetch("/api/jobapp/reject?appID=" + id, {
       method: "PUT",
@@ -161,7 +156,6 @@ const Table: React.FC<Props> = ({ query }) => {
 
     const data = await res.json();
     const statusCode = res.status;
-    // console.log(data);
     if (statusCode === 200) {
       //trigger revalidation if there changes, trigger render
       mutate(`/api/jobapp?page=${currentPage}&option=${query}`);

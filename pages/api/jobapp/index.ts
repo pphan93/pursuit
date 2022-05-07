@@ -31,6 +31,8 @@ export default async function handler(
     const client = await connectToDatabase();
 
     const db = client.db();
+
+    //get user id from session, contain email, use email to get user id to search
     const customer = await db
       .collection("Users")
       .findOne({ email: token.email }, { projection: { _id: 1 } });
@@ -40,7 +42,7 @@ export default async function handler(
 
     //-----------------ADD NEW APPLICATION ---------------------//
     if (req.method === "POST") {
-      const inputData = req.body.userInput;
+      const inputData = req.body.formData;
       let data = {};
 
       data = {
@@ -58,7 +60,7 @@ export default async function handler(
         jobLevel: inputData.jobLevel,
         applicationStatus: [
           {
-            name: inputData.applicationStatus,
+            name: "Applied",
             status: "Active",
             createdDate: new Date(),
             lastModified: new Date(),

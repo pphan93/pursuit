@@ -1,10 +1,31 @@
-import { ReactElement } from "react";
 import Form from "../../components/Form/Form";
-import Layout from "../../components/layout/Layout";
 import { getSession } from "next-auth/react";
 import { GetServerSideProps } from "next";
+import { useRouter } from "next/router";
 
 const NewApplication = () => {
+  const router = useRouter();
+
+  const updateDataHandler = async (formData: {}) => {
+    //send user info to backend to add user to database
+    const res = await fetch("/api/jobapp", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        formData,
+      }),
+    });
+
+    const returnData = await res.json();
+    const statusCode = res.status;
+
+    if (statusCode === 201) {
+      router.push(`/jobdetail/${returnData.data.insertedId}`);
+    }
+  };
+
   return (
     <div className=" md:p-8 mb-6">
       <div className="flex flex-wrap items-center mb-6">
@@ -14,7 +35,7 @@ const NewApplication = () => {
           </h1>
         </div>
       </div>
-      <Form data={null} />
+      <Form data={null} edit={true} updateHandler={updateDataHandler} />
       {/* <button className=" absolute bottom-7 right-20 p-2 my-2 bg-blue-500 text-white rounded-md focus:outline-none focus:ring-2 ring-blue-300 ring-offset-2">
         Submit
       </button> */}

@@ -1,19 +1,13 @@
-import {
-  useState,
-  useCallback,
-  useRef,
-  ReactElement,
-  useEffect,
-  ChangeEvent,
-} from "react";
+import { useState, useEffect } from "react";
 import Form from "../../components/Form/Form";
 import ArrowsStepper from "../../components/ui/ArrowsStepper";
 import RatingStars from "../../components/ui/Icon/RatingStars";
-import useSWR from "swr";
 import { useRouter } from "next/router";
 import Loading from "../../components/ui/Loading";
 import { getSession } from "next-auth/react";
 import { GetServerSideProps } from "next";
+import { Edit } from "iconsax-react";
+import useSWR, { useSWRConfig } from "swr";
 
 export async function fetcher<JSON = any>(
   input: RequestInfo,
@@ -41,10 +35,14 @@ interface ApiData {
 
 const JobDetail = () => {
   const router = useRouter();
+  const { mutate } = useSWRConfig();
+
   const { jobID } = router.query;
   const [status, setStatus] = useState<
     { status: string | null; name: string }[]
   >([]);
+
+  const [edit, setEdit] = useState(false);
 
   const { data, error }: any = useSWR(
     jobID ? `/api/jobapp/${jobID}` : null,
@@ -63,9 +61,7 @@ const JobDetail = () => {
   if (error) return <div>failed to load</div>;
   if (!data) return <Loading />;
 
-  // console.log(statusSelect);
-
-  // console.log(jobID);
+  //hard cord the company rating until figure out where to pull the info
   let rating = 3;
   let styleName = [];
 
@@ -78,18 +74,16 @@ const JobDetail = () => {
     }
   }
 
-  // console.log(data);
-
+  //status update
   const onClickHandler = (value: string | null): void => {
     //progress in the steppers
-
     const existingItems = [...status];
 
     const current = existingItems.findIndex(
       (item: { name: string; status: string | null }) => item.name === value
     );
 
-    // console.log(current);
+    //create an object to store in db
     const updatedItem = existingItems.map(
       (item: { name: string; status: string | null }, index) => {
         return item.name === value && item.name !== "Accepted"
@@ -104,10 +98,8 @@ const JobDetail = () => {
       }
     );
 
-    // setStatus(updatedItem);
-
     const updateStatusAPI = async () => {
-      const res = await fetch(`/api/jobapp/${jobID}`, {
+      const res = await fetch(`/api/jobapp/${jobID}?update=status`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -116,8 +108,6 @@ const JobDetail = () => {
           updatedItem,
         }),
       });
-
-      // console.log(res);
 
       const updateRes = await res.json();
 
@@ -128,6 +118,27 @@ const JobDetail = () => {
     };
 
     updateStatusAPI();
+  };
+
+  const updateDataHandler = async (formData: {}) => {
+    const res = await fetch(`/api/jobapp/${jobID}?update=all`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        formData,
+      }),
+    });
+
+    const returnData = await res.json();
+    const statusCode = res.status;
+
+    if (statusCode === 200) {
+      console.log("test");
+      setEdit(false);
+      mutate(`/jobdetail/${jobID}`);
+    }
   };
 
   //Show the active status for mobile version (use selector instead of arrow steppers), if reject show rejected
@@ -147,10 +158,20 @@ const JobDetail = () => {
   return (
     <div className=" md:p-8 mb-6">
       <div className="flex flex-wrap items-center">
-        <div className="relative w-full  max-w-full flex-grow flex-1">
-          <h3 className="font-semibold text-base md:text-lg lg:text-2xl text-prussblue">
-            {data.data.jobTitle}
-          </h3>
+        <div className="relative w-1/4 mr-20  max-w-full flex-grow flex-1">
+          <span className="flex items-center">
+            <h3 className="truncate w-auto font-semibold text-base md:text-lg lg:text-2xl text-prussblue">
+              {data.data.jobTitle}
+            </h3>
+            <span
+              onClick={() => {
+                setEdit((prev) => !prev);
+              }}
+              className="ml-3  w-5 cursor-pointer text-cblue hover:text-gray-600"
+            >
+              <Edit size={20} />
+            </span>
+          </span>
           <p className="font-semibold text-sm md:text-base text-prussblue">
             {data.data.company.name}
           </p>
@@ -198,7 +219,9 @@ const JobDetail = () => {
         </div>
         <ArrowsStepper status={status} onClickArrow={onClickHandler} />
       </div>
-      {data ? <Form data={data.data} /> : null}
+      {data ? (
+        <Form data={data.data} edit={edit} updateHandler={updateDataHandler} />
+      ) : null}
     </div>
   );
 };
